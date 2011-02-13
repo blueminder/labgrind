@@ -1,4 +1,6 @@
 Labgrind::Application.routes.draw do
+  resources :annotations
+
   resources :items
 
   resources :labs do
