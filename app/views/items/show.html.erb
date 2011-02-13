@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @item.name %>
+</p>
+
+<p>
+  <b>Lab:</b>
+  <% if @item.lab then %>
+  <%= link_to @item.lab.name, @item.lab %>
+  <% else %>
+  None (?)
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
