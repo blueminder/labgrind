@@ -40,20 +40,23 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.xml
   def create
-    @lab = Lab.find(params[:lab_id])
-    @item = @lab.items.create(params[:item])
-    redirect_to lab_path(@lab)
-    # @item = Item.new(params[:item])
+    if params[:lab_id] then
+      @lab = Lab.find(params[:lab_id])
+      @item = @lab.items.create(params[:item])
+      redirect_to lab_path(@lab)
+    else
+      @item = Item.new(params[:item])
 
-    #respond_to do |format|
-    #  if @item.save
-    #    format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
-    #    format.xml  { render :xml => @item, :status => :created, :location => @item }
-    #  else
-    #    format.html { render :action => "new" }
-    #    format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
-    #  end
-    #end
+      respond_to do |format|
+        if @item.save
+          format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+          format.xml  { render :xml => @item, :status => :created, :location => @item }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
   end
 
   # PUT /items/1
