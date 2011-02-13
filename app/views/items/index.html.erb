@@ -12,7 +12,13 @@
 <% @items.each do |item| %>
   <tr>
     <td><%= item.name %></td>
-    <td><%= item.lab %></td>
+    <td>
+      <% if item.lab then %>
+      <%= link_to item.lab.name, item.lab %>
+      <% else %>
+      This item is homeless :(
+      <% end %>
+    </td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,5 +1,9 @@
 Labgrind::Application.routes.draw do
-  resources :labs
+  resources :items
+
+  resources :labs do
+    resources :items
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
