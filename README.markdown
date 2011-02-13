@@ -4,5 +4,5 @@
 
 **labgrind** is being developed for the Georgia Institute of Technology class CS3651: The Art of Prototyping Intelligent Appliances, and will also be used for the student-run lab modeled after the class as time goes on.
 
-Copyright &copy; 2011 Enrique Santos, Matthew Greenland, Joshua Cranmer, Tianxiao Xia 
+Copyright &copy; 2011 Enrique Santos, Matthew Greenland, Joshua Cranmer, Tianxiao Xia<br />
 This program is released under the terms of the GNU General Public License v3.0
