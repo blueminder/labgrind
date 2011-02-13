@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <b>Description:</b>
+  <%= @item.description %>
+</p>
+
+<p>
   <b>Lab:</b>
   <% if @item.lab then %>
   <%= link_to @item.lab.name, @item.lab %>
