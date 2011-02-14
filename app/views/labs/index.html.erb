@@ -1,8 +1,7 @@
-<h1>Listing labs</h1>
+<h1>Labs</h1>
 
 <table>
   <tr>
-    <th>Name</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,14 +9,20 @@
 
 <% @labs.each do |lab| %>
   <tr>
-    <td><%= lab.name %></td>
-    <td><%= link_to 'Show', lab %></td>
-    <td><%= link_to 'Edit', edit_lab_path(lab) %></td>
-    <td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to lab.name, lab %></td>
+    <% if current_user.class_type == "Administrator" %>
+      <td><%= link_to 'Edit', edit_lab_path(lab) %></td>
+      <td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if current_user.class_type == "Administrator" %>
 <%= link_to 'New Lab', new_lab_path %>
+<% end %>

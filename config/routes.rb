@@ -1,4 +1,8 @@
 Labgrind::Application.routes.draw do
+  resources :users do
+    resources :skills
+  end
+
   resources :items do
     resources :annotations
   end
@@ -12,4 +16,10 @@ Labgrind::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'inventory' => 'items#index'
   match "/inventory/:id" => 'items#show'
+  match "/administrators/:id" => 'users#show'
+
+  ActionController::Routing::Routes.draw do |map|
+    map.resources :administrators
+  end
+
 end

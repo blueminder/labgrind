@@ -6,12 +6,11 @@
     <th>Lab</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @items.each do |item| %>
   <tr>
-    <td><%= item.name %></td>
+    <td><%= link_to item.name, item %></td>
     <td>
       <% if item.lab then %>
       <%= link_to item.lab.name, item.lab %>
@@ -19,13 +18,18 @@
       This item is homeless :(
       <% end %>
     </td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if current_user.class_type == "Administrator" %>
+      <td><%= link_to 'Edit', edit_item_path(item) %></td>
+      <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Item', new_item_path %>
+<% if current_user.class_type == "Administrator" %>
+  <%= link_to 'New Item', new_item_path %>
+<% end %>

@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @lab.name %>
+  <h1><%= @lab.name %></h1>
 </p>
 
 <p>
@@ -14,6 +13,7 @@
   </ul>
 </p>
 
+<% if current_user.class_type == "Administrator" %>
 <p>
   <b>Add item:</b>
   <%= form_for([@lab, @lab.items.build]) do |f| %>
@@ -26,6 +26,9 @@
   </div>
   <% end %>
 </p>
-  
-<%= link_to 'Edit', edit_lab_path(@lab) %> |
+<% end %>
+
+<% if current_user.class_type == "Administrator" %>
+  <%= link_to 'Edit', edit_lab_path(@lab) %> |
+<% end %>
 <%= link_to 'Back', labs_path %>
