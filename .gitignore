@@ -2,5 +2,8 @@
 db/*.sqlite3
 log/*.log
 tmp/**/*
+*~
 Gemfile.lock
+<<<<<<< HEAD
 .redcar
+db/schema.rb
