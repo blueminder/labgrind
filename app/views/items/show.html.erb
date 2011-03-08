@@ -25,6 +25,7 @@
   <div class="field">
     <%= f.text_area :text, :size => "80x5" %>
   </div>
+  <%= f.hidden_field :user_id, {:value => current_user.id} %>
   <div class="action">
     <%= f.submit %>
   </div>
@@ -34,9 +35,14 @@
 <p>
   <b>Notes and Annotations:</b> <br />
   <table>
-    <tr> <th> Timestamp </th> <th> Note </th> </tr>
+    <tr> <th> User </th> <th> Timestamp </th> <th> Note </th> </tr>
     <% @item.annotations.reverse.each do |annotation| %>
     <tr>
+      <td>
+	<% if annotation.user then %>
+	<b> <%= annotation.user.username %> </b>
+	<% end %>
+      </td>
       <td>
 	<% if annotation.created_at then %>
 	<%= annotation.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
