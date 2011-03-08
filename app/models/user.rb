@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
   has_many :skills
   has_many :labs
+  has_many :annotations
 
   def self.factory(type,params)
     type ||= 'User'
