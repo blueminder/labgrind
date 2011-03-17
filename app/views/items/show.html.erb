@@ -46,7 +46,7 @@
    %>
                      
 <div class="action">
-  <%= f.submit :value=>button_title, :enabled=>show_button %>
+  <%= f.submit :value=>button_title, :disabled=>(not show_button)  %>
 </div>
 <% end %>
 
