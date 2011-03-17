@@ -1,15 +1,19 @@
 Labgrind::Application.routes.draw do
   resources :users do
     resources :skills
+    resources :transactions
   end
 
   resources :items do
     resources :annotations
+    resources :transactions
   end
 
   resources :labs do
     resources :items
   end
+
+  resources :transactions
 
   resources :users, :user_sessions
   match 'login' => 'user_sessions#new', :as => :login

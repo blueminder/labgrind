@@ -32,6 +32,65 @@
   <% end %>
 </p>
 
+
+<%= form_for([@item, @item.transactions.build]) do |f| %>
+<%
+   show_button = not(@item.checked_out? or @item.checkout_requested?)
+   button_title = if @item.checked_out? then
+                     "Already checked out"
+                   elsif @item.checkout_requested? then
+                     "Checkout already requested"
+                   else
+                     "Request checkout"
+                   end
+   %>
+                     
+<div class="action">
+  <%= f.submit :value=>button_title, :enabled=>show_button %>
+</div>
+<% end %>
+
+<% if current_user.is_a? Administrator then %>
+<p>
+  <b> Transaction Log </b> <br />
+  <% if @item.transactions.length <= 1 then %>
+  <em> No transactions yet </em>
+  <% else %>
+  <table>
+    <tr> <th> Type </th> <th> User </th>
+      <th> Status </th> <th> Timestamp </th> </tr>
+    <% @item.transactions.each do |t| %>
+    <tr>
+      <td>
+	<% if t.class_type then %>
+	<%= t.class_type %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.user then %>
+	<%= t.user.username %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.status then %>
+	<%= t.status %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.created_at? then %>
+	<%= t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
+	<% end %>
+      </td>
+    <tr />
+    <% end %>
+  </table>
+  <% end %>
+</p>
+<% end %>
+
+<%# For whatever reason, I get an extra annotation? Empty lists come back %>
+<%# has having one item, so I guess we should ignore all 1-item lists. %>
+<% unless @item.annotations.length <= 1 then %>
 <p>
   <b>Notes and Annotations:</b> <br />
   <table>
@@ -55,6 +114,7 @@
     <% end %>
   </table>
 </p>
+<% end %>
 
 <% if current_user.class_type == "Administrator" %>
   <%= link_to 'Edit', edit_item_path(@item) %> |
