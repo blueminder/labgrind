@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :skills
   has_many :labs
   has_many :annotations
+  has_many :transactions
 
   def self.factory(type,params)
     type ||= 'User'
