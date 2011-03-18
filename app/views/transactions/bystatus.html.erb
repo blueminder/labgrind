@@ -2,33 +2,6 @@
 
 <h1> All <%= params[:status] %> transactions </h1>
 
-<table>
-  <tr> <th> Type </th> <th> User </th>
-    <th> Status </th> <th> Timestamp </th> </tr>
-<% @transactions.each do |t| %>
-<tr>
-  <td>
-    <% if t.class_type then %>
-    <%= t.class_type %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.user then %>
-    <%= t.user.username %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.status then %>
-    <%= t.status %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.created_at? then %>
-    <%= t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
-    <% end %>
-  </td>
-</tr>
-<% end %>
-</table>
+<%= render 'list' %>
 
 <% end %>

@@ -20,6 +20,15 @@ before_filter :require_user
     end
   end
 
+  def approve
+    if params[:transaction_id] then
+      t = Transaction.find(params[:transaction_id])
+      t.status = "Complete"
+      t.save
+      redirect_to transactions_path
+    end
+  end
+
   # POST /transactions
   # POST /transactions.xml
   def create
