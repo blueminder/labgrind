@@ -1,4 +1,2 @@
-require "transaction.rb"
-
-class CheckIn < Transaction
+class Checkin < Transaction
 end
