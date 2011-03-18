@@ -21,6 +21,7 @@ Labgrind::Application.routes.draw do
   match 'inventory' => 'items#index'
   match "/inventory/:id" => 'items#show'
   match "/administrators/:id" => 'users#show'
+  match "/transactions/status/:status" => "transactions#bystatus"
 
   ActionController::Routing::Routes.draw do |map|
     map.resources :administrators

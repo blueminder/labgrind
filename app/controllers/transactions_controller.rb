@@ -11,8 +11,8 @@ before_filter :require_user
     end
   end
 
-  def pending
-    @transactions = Transaction.find(:status => "Pending")
+  def bystatus
+    @transactions = Transaction.where(:status => params[:status])
 
     respond_to do |format|
       format.html
