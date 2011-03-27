@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :require_admin
 
   def get_all_skills
     @skills = Skill.find(:all)
