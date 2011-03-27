@@ -13,7 +13,7 @@
   </ul>
 </p>
 
-<% if current_user.class_type == "Administrator" %>
+<% if current_user.class_type == "Admin" %>
 <p>
   <b>Add item:</b>
   <%= form_for([@lab, @lab.items.build]) do |f| %>
@@ -28,7 +28,7 @@
 </p>
 <% end %>
 
-<% if current_user.class_type == "Administrator" %>
+<% if current_user.class_type == "Admin" %>
   <%= link_to 'Edit', edit_lab_path(@lab) %> |
 <% end %>
 <%= link_to 'Back', labs_path %>

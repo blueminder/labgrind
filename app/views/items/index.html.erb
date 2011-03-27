@@ -18,7 +18,7 @@
       This item is homeless :(
       <% end %>
     </td>
-    <% if current_user.class_type == "Administrator" %>
+    <% if current_user.class_type == "Admin" %>
       <td><%= link_to 'Edit', edit_item_path(item) %></td>
       <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
     <% else %>
@@ -30,6 +30,6 @@
 </table>
 
 <br />
-<% if current_user.class_type == "Administrator" %>
+<% if current_user.class_type == "Admin" %>
   <%= link_to 'New Item', new_item_path %>
 <% end %>

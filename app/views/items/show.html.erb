@@ -54,7 +54,7 @@
 </div>
 <% end %>
 
-<% if current_user.is_a? Administrator then %>
+<% if current_user.is_a? Admin then %>
 <p>
   <b> Transaction Log </b> <br />
   <% if @item.transactions.length <= 1 then %>
@@ -120,7 +120,7 @@
 </p>
 <% end %>
 
-<% if current_user.class_type == "Administrator" %>
+<% if current_user.class_type == "Admin" %>
   <%= link_to 'Edit', edit_item_path(@item) %> |
 <% end %>
 <%= link_to 'Back', items_path %>
