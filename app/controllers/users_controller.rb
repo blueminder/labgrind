@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
   before_filter :require_admin
+
+  def get_all_skills
+    @skills = Skill.find(:all)
+  end
+
   # GET /users
   # GET /users.xml
   def index
@@ -35,6 +40,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    get_all_skills
     @user = User.find(params[:id])
   end
 
@@ -42,6 +48,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    get_all_skills
 
     respond_to do |format|
       if @user.save
@@ -58,10 +65,11 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    get_all_skills
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@user.becomes(User), :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,5 +88,6 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+
   end
 end
