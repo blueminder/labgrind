@@ -30,7 +30,8 @@
   </td>
   <% if t.pending? %>
   <td>
-    <%= form_tag "approve" do %>
+    <%= form_tag (url_for(:action => "approve", \
+                          :controller => "transactions")) do %>
     <%= hidden_field_tag(:transaction_id, t.id) %>
     <%= submit_tag "Approve" %>
     <% end %>

@@ -47,7 +47,7 @@
                      
 <div class="action">
   <%= f.hidden_field :user_id, {:value => current_user.id} %>
-  <%= f.hidden_field :class_type, {:value => "CheckOut"} %>
+  <%= f.hidden_field :class_type, {:value => "Checkout"} %>
   <%= f.hidden_field :status, {:value => "Pending"} %>
   <%= f.hidden_field :due_date, {:value => "Eventually"} %>
   <%= f.submit :value=>button_title, :disabled=>(not show_button)  %>
