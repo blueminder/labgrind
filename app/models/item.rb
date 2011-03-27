@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   validates :name, :presence => true
   belongs_to :lab
+  belongs_to :user
   has_many :annotations
   has_many :transactions
 
@@ -9,9 +10,7 @@ class Item < ActiveRecord::Base
   end
 
   def checked_out?
-    not last_transaction.nil? \
-    and last_transaction.is_a? Checkout \
-    and last_transaction.complete?
+    not user.nil?
   end
 
   def checkout_requested?

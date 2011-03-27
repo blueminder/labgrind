@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :labs
   has_many :annotations
   has_many :transactions
+  has_many :items
 
   attr_accessor :skill_list
   after_save :update_skills

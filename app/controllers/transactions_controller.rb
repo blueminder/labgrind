@@ -12,7 +12,7 @@ before_filter :require_user
   end
 
   def bystatus
-    @transactions = Transaction.where(:status => params[:status])
+    @transactions = Transaction.where(:status => params[:status].capitalize)
 
     respond_to do |format|
       format.html
@@ -25,6 +25,7 @@ before_filter :require_user
       t = Transaction.find(params[:transaction_id])
       t.status = "Complete"
       t.save
+      t.approve
       redirect_to transactions_path
     end
   end

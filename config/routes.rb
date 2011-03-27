@@ -3,6 +3,7 @@ Labgrind::Application.routes.draw do
   resources :users do
     resources :skills
     resources :transactions
+    resources :items
   end
 
   resources :items do
