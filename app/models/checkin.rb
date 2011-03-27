@@ -1,6 +1,6 @@
 class Checkin < Transaction
 
-  def approve
+  def created
     item.user = nil
     item.save
   end

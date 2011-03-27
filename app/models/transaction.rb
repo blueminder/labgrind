@@ -31,4 +31,11 @@ class Transaction < ActiveRecord::Base
   def class_type
     return self[:type]
   end
+
+  def created
+    puts "created generic transaction?"
+  end
+
+  def approve
+  end
 end

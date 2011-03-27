@@ -34,9 +34,21 @@ before_filter :require_user
   # POST /transactions.xml
   def create
     if params[:item_id] then
-      @item = Item.find(params[:item_id])
-      @transaction = @item.transactions.create(params[:transaction])
-      redirect_to item_path(@item)
+      item = Item.find(params[:item_id])
+      transaction = item.transactions.create(params[:transaction])
+      path = item_path(item)
+    elsif params[:user_id] then
+      user = User.find(params[:user_id])
+      transaction = user.transactions.create(params[:transaction])
+      path = user_path(user)
+    end
+
+    if transaction then
+      # What we got was a generic Transaction; we want the subclass
+      # so that polymorphism can do its thing
+      transaction = transaction.becomes(transaction.class_type.constantize)
+      transaction.created
+      redirect_to path
     end
   end
 

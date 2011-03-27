@@ -18,7 +18,18 @@
       <td>
 	<%= link_to(item.name, item) %>
       </td> <td>
-	(this should be a checkout button)
+	<%# If the user's an Admin, it screws up therouting information here
+	    We'll just cast them to a normal User temporarily %>
+	<% user = @user.becomes(User) %> 
+	<%= form_for([user, user.transactions.build]) do |f| %>
+	<div class="action">
+	  <%= f.hidden_field :item_id, {:value => item.id} %>
+	  <%= f.hidden_field :class_type, {:value => "Checkin"} %>
+	  <%= f.hidden_field :status, {:value => "Complete"} %>
+	  <%= f.hidden_field :due_date, {:value => "Eventually"} %>
+	  <%= f.submit :value=> "Check in" %>
+	</div>
+	<% end %>
       </td>
     </tr>
     <% end %>
@@ -29,7 +40,7 @@
   <b>Transaction log:</b>
   <table>
     <tr> <th> Type </th> <th> Status </th> <th> Datetime </th> </tr>
-    <% @user.transactions.each do |t| %>
+    <% @user.transactions.reverse.each do |t| %>
     <tr>
       <td>
 	<%= t.class_type %>
