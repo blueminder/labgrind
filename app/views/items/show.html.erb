@@ -37,7 +37,7 @@
 <%
    show_button = not(@item.checked_out? or @item.checkout_requested?)
    button_title = if @item.checked_out? then
-                     "Already checked out"
+                     "Already checked out by #{@item.checked_out_by.username}"
                    elsif @item.checkout_requested? then
                      "Checkout already requested"
                    else

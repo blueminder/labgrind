@@ -19,4 +19,8 @@ class Item < ActiveRecord::Base
     and last_transaction.is_a? Checkout \
     and not last_transaction.complete?
   end
+
+  def checked_out_by
+    checked_out? and last_transaction.user
+  end
 end
