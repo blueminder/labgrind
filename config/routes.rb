@@ -14,7 +14,7 @@ Labgrind::Application.routes.draw do
     resources :items
   end
 
-  resources :users, :user_sessions, :skills
+  resources :transactions
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
