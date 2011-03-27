@@ -1,2 +1,0 @@
-class AdministratorController < UserController
-end

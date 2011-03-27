@@ -1,4 +1,5 @@
 Labgrind::Application.routes.draw do
+
   resources :users do
     resources :skills
     resources :transactions
@@ -13,9 +14,8 @@ Labgrind::Application.routes.draw do
     resources :items
   end
 
-  resources :transactions
+  resources :users, :user_sessions, :skills
 
-  resources :users, :user_sessions
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'inventory' => 'items#index'
@@ -25,7 +25,9 @@ Labgrind::Application.routes.draw do
   match "/transactions/approve" => "transactions#approve"
 
   ActionController::Routing::Routes.draw do |map|
-    map.resources :administrators
+    map.namespace :admin do |admin|
+      admin.resources :users
+    end
   end
 
 end
