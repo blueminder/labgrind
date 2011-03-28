@@ -1,4 +1,4 @@
-body { background-color: #fff; color: #333; }
+body { background-color: #FBF5E6; color: #333; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -12,9 +12,9 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
+a { color: #8B2500; font-weight: bold; text-decoration: none; }
 a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a:hover { color: #fff; background-color:#000; text-decoration: underline; }
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -58,19 +58,31 @@ div.field, div.actions {
 table{
     border-spacing: 0px;
     border-collapse: collapse;
-    width: 250px;
 }
 th {
     text-align: center;
     font-weight: bold;
     padding: 2px;
-    border: 2px solid #FFFFFF;
-    background: #4a70aa;
+    border: 1px solid #000;
+    background: #8B2500;
     color: #FFFFFF;
+}
+tr {
+    background: #FDFCDC;
 }
 td {
     text-align: center;
-    padding: 2px;
-    border: 2px solid #FFFFFF;
-    background: #e3f0f7;
+    padding: 6px;
+    border: 1px solid #000;
+}
+
+#nav {
+    float: right;
+}
+
+#head {
+    text-align: left;
+}
+#content {
+  padding-left: 15px;
 }

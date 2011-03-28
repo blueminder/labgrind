@@ -4,8 +4,10 @@
   <tr>
     <th>Name</th>
     <th>Lab</th>
+    <% if current_user.class_type == "Admin" %>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
 
 <% @items.each do |item| %>
@@ -21,9 +23,6 @@
     <% if current_user.class_type == "Admin" %>
       <td><%= link_to 'Edit', edit_item_path(item) %></td>
       <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% else %>
-      <td></td>
-      <td></td>
     <% end %>
   </tr>
 <% end %>

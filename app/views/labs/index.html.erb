@@ -1,10 +1,12 @@
-<h1>Labs</h1>
+<h1>Available Labs</h1>
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Laboratory</th>
+    <% if current_user.is_a? Admin %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @labs.each do |lab| %>
@@ -13,9 +15,6 @@
     <% if current_user.class_type == "Admin" %>
       <td><%= link_to 'Edit', edit_lab_path(lab) %></td>
       <td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% else %>
-      <td></td>
-      <td></td>
     <% end %>
   </tr>
 <% end %>
