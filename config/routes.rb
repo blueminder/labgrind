@@ -27,6 +27,8 @@ Labgrind::Application.routes.draw do
   match "/transactions/status/:status" => "transactions#bystatus"
   match "/transactions/approve" => "transactions#approve"
 
+  root :to => 'user_sessions#new', :as => :login
+
   ActionController::Routing::Routes.draw do |map|
     map.namespace :admin do |admin|
       admin.resources :users

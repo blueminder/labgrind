@@ -1,20 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Username:</b>
+<h2>
   <%= @user.username %>
-</p>
+</h2>
 
+<div id="content">
 <p>
-  <b>Email:</b>
+  <b>Email</b><br>
   <%= @user.email %>
 </p>
 
 <p>
-  <b>Items Checked Out:</b>
+  <b>User Skills</b><br>
+  <% @user.skills.each do |skill| %>
+    <%= skill.name %> <br>
+  <% end %>
+</p>
+
+<% if @user == current_user %>
+<p>
+  <b>Checked Out Items</b>
+  <% if @user.items.size == 0 %>
+  <br>No items are currently checked out.
+  <% else %>
   <table>
+    <tr> <th>Lab</th> <th>Item Name</th> <th></th> </tr>
     <% @user.items.each do |item| %>
+    
     <tr>
+      <td><%= Lab.find_by_id(item.lab_id).name %>
       <td>
 	<%= link_to(item.name, item) %>
       </td> <td>
@@ -34,12 +48,13 @@
     </tr>
     <% end %>
   </table>
+  <% end %>
 </p>
 
 <p>
-  <b>Transaction log:</b>
+  <b>Past Transactions</b>
   <table>
-    <tr> <th> Type </th> <th> Status </th> <th> Datetime </th> </tr>
+    <tr> <th> Type </th> <th> Status </th> <th> Time </th> </tr>
     <% @user.transactions.reverse.each do |t| %>
     <tr>
       <td>
@@ -56,22 +71,11 @@
     <% end %>
   </table>
 </p>
+<% end %>
+</div>
 
-<p>
-  <b>Crypted password:</b>
-  <%= @user.crypted_password %>
-</p>
+<% if current_user.is_a? Admin %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 
-<p>
-  <b>Password salt:</b>
-  <%= @user.password_salt %>
-</p>
-
-<p>
-  <b>Persistence token:</b>
-  <%= @user.persistence_token %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'View All Members', users_path %>
