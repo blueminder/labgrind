@@ -1,0 +1,59 @@
+digraph G {
+	graph [overlap="scalexy"];
+	edge [arrowhead="none"];
+	/* Entities */
+	node [shape="rect"];
+	Item;
+	Lab;
+	Skill;
+	User;
+
+	/* Relationships */
+	node [shape="diamond"];
+	Skill_User [label="Has"];
+	User -> Skill_User [headlabel="M"];
+	Skill_User -> Skill [taillabel="N"];
+
+	Transaction [label="Transacts"];
+	User -> Transaction [headlabel="M"];
+	Item -> Transaction [headlabel="N"];
+
+	Annotation [label="Annotates"];
+	User -> Annotation [headlabel="M"];
+	Item -> Annotation [headlabel="N"];
+
+	Item_User [label="Uses"];
+	User -> Item_User [headlabel="N"];
+	Item_User -> Item [taillabel="1"];
+
+	Item_Lab [label="Contains"];
+	Item -> Item_Lab [headlabel="N"];
+	Item_Lab -> Lab [taillabel="1"];
+
+	/* Attributes */
+	node [shape="ellipse"];
+	Text -> Annotation;
+	Description -> Skill;
+	Type -> Transaction;
+	Time -> Transaction;
+	Status -> Transaction;
+	"Due Date" -> Transaction;
+
+	Username -> User;
+	Email -> User;
+	Password -> User;
+	TypeN [label="Type"];
+	TypeN -> User;
+	TimeN [label="Time"];
+	Time -> Annotation;
+
+	node [label="Name"];
+	NameItem -> Item;
+	NameLab -> Lab;
+	NameSkill -> Skill;
+
+	node [label=<<U>ID</U>>];
+	IDItem -> Item;
+	IDLab -> Lab;
+	IDSkill -> Skill;
+}
