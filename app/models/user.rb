@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   attr_accessor :skill_list
   after_save :update_skills
 
+  def to_param
+    username
+  end
 
   def self.factory(type,params)
     type ||= 'User'

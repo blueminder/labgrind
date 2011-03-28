@@ -1,15 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Username:</b>
+  <b>Username:</b><br>
   <%= @user.username %>
 </p>
 
 <p>
-  <b>Email:</b>
+  <b>Email:</b><br>
   <%= @user.email %>
 </p>
 
+<p>
+  <b>User Skills:</b><br>
+  <% @user.skills.each do |skill| %>
+    <%= skill.name %> <br>
+  <% end %>
+</p>
+
+<% if @user == current_user %>
 <p>
   <b>Items Checked Out:</b>
   <table>
@@ -37,7 +45,7 @@
 </p>
 
 <p>
-  <b>Transaction log:</b>
+  <b>Transaction Log:</b>
   <table>
     <tr> <th> Type </th> <th> Status </th> <th> Datetime </th> </tr>
     <% @user.transactions.reverse.each do |t| %>
@@ -56,22 +64,9 @@
     <% end %>
   </table>
 </p>
+<% end %>
 
-<p>
-  <b>Crypted password:</b>
-  <%= @user.crypted_password %>
-</p>
-
-<p>
-  <b>Password salt:</b>
-  <%= @user.password_salt %>
-</p>
-
-<p>
-  <b>Persistence token:</b>
-  <%= @user.persistence_token %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 <%= link_to 'Back', users_path %>
