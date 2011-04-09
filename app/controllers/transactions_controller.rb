@@ -38,6 +38,19 @@ class TransactionsController < ApplicationController
     end
   end
 
+  # Rejects the current transaction. The code is largely similar to
+  # TransactionsController#approve; it just merely sets a different status and
+  # calls Transaction#cancel instead.
+  def reject
+    if params[:transaction_id] then
+      t = Transaction.find(params[:transaction_id])
+      t.status = "Cancelled"
+      t.save
+      t.cancel
+      redirect_to transactions_path
+    end
+  end
+
   # POST /transactions
   # POST /transactions.xml
   # Creates a new transaction.

@@ -57,4 +57,8 @@ class Transaction < ActiveRecord::Base
   # This has no actual functionality, but can be overridden by subclasses.
   def approve
   end
+
+  # Cancels the current pending transaction.  
+  def cancel
+  end
 end

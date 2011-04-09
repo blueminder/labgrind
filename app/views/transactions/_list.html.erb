@@ -1,4 +1,4 @@
-<table>
+<table id="transactions">
   <tr> <th> Type </th> <th> User </th> <th> Item </th>
     <th> Status </th> <th> Timestamp </th> </tr>
   <% @transactions.each do |t| %>
@@ -34,6 +34,12 @@
 				:controller => "transactions")) do %>
 	    <%= hidden_field_tag(:transaction_id, t.id) %>
 	    <%= submit_tag "Approve" %>
+	  <% end %>
+	</td><td>
+	  <%= form_tag (url_for(:action => "reject", \
+				:controller => "transactions")) do %>
+	    <%= hidden_field_tag(:transaction_id, t.id) %>
+	    <%= submit_tag "Reject" %>
 	  <% end %>
 	</td>
       <% end %>
