@@ -30,6 +30,7 @@ class Item < ActiveRecord::Base
   def checkout_requested?
     not last_transaction.nil? \
     and last_transaction.is_a? Checkout \
-    and not last_transaction.complete?
+    and not last_transaction.complete? \
+	and not last_transaction.cancelled?
   end
 end

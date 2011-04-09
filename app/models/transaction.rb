@@ -59,6 +59,7 @@ class Transaction < ActiveRecord::Base
   end
 
   # Cancels the current pending transaction.  
+  # This has no actual functionality, but can be overridden by subclasses.
   def cancel
   end
 end
