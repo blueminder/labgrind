@@ -24,13 +24,17 @@
 	<br>No items are currently checked out.
       <% else %>
 	<table>
-	  <tr> <th>Lab</th> <th>Item Name</th> <th></th> </tr>
+	  <tr> <th>Lab</th> <th>Item Name</th> <th>Due Date</th><th></th></tr>
 	  <% @user.items.each do |item| %>
 	    
 	    <tr>
 	      <td><%= Lab.find_by_id(item.lab_id).name %>
 	      <td>
 		<%= link_to(item.name, item) %>
+	      </td>
+	      <td>
+		<%= item.due_date \
+		    and item.due_date.strftime("%a %b %e") %>
 	      </td>
 	      <% if current_user.is_a? Admin then %>
 		<td>

@@ -34,10 +34,15 @@ class Item < ActiveRecord::Base
   end
 
   # If this item is checked out, figure out when it's due to be returned.
-  # Returns nil if the item isn't checked out.
+  # Returns nil if the item isn't checked out, or if the due date is in a
+  # bad format or something.
   def due_date
     if checked_out? then
-      last_transaction.due_date
+      begin
+        DateTime.parse last_transaction.due_date
+      rescue ArgumentError
+        nil
+      end
     end
   end
 
