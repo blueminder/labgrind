@@ -26,6 +26,8 @@
 	  <% if current_user.is_a? Admin %>
             <b>Administrator Menu</b><br>
             <%= link_to "Transactions", :transactions %><br>
+	    <%= link_to "Pending Transactions", \
+		"/transactions/status/pending" %>
 	  <% end %>
 	</p>
       <% end %>
