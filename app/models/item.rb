@@ -33,4 +33,17 @@ class Item < ActiveRecord::Base
     and not last_transaction.complete?
   end
 
+  # If this item is checked out, figure out when it's due to be returned.
+  # Returns nil if the item isn't checked out.
+  def due_date
+    if checked_out? then
+      last_transaction.due_date
+    end
+  end
+
+  # Checks whether or not this item is overdue.
+  def overdue?
+    due_date and DateTime.now > due_date
+  end
+
 end
