@@ -29,8 +29,12 @@ class TransactionsController < ApplicationController
   # Approves a transaction. Only admins should be able to call this method,
   # directly or indirectly.
   def approve
+    puts params.inspect
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])
+      if (params[:transaction][:due_date]) then
+        t.due_date = params[:transaction][:due_date]
+      end
       t.status = "Complete"
       t.save
       t.approve

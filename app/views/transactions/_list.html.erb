@@ -32,6 +32,8 @@
 	<td>
 	  <%= form_tag (url_for(:action => "approve", \
 				:controller => "transactions")) do %>
+	    Due on:
+	    <%= text_field :transaction, :due_date %>
 	    <%= hidden_field_tag(:transaction_id, t.id) %>
 	    <%= submit_tag "Approve" %>
 	  <% end %>
