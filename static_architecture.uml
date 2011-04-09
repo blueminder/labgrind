@@ -59,4 +59,4 @@ digraph staticArchitecture {
         Models -> Controllers [label = "Returns data to"]
         Controllers -> Views [label = "Passes data to"]
         Views -> Server [label = "Renders Webpage"]
-}
+} 
