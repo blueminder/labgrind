@@ -1,3 +1,4 @@
+# The controller for manipulation of items
 class ItemsController < ApplicationController
   before_filter :require_user
   # GET /items

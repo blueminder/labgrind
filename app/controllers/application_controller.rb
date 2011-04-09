@@ -1,3 +1,4 @@
+# The base controller for all controllers in this application.
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
