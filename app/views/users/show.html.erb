@@ -33,8 +33,14 @@
 		<%= link_to(item.name, item) %>
 	      </td>
 	      <td>
+		<% if item.overdue? then %>
+		  <span class="overdue">
+		<% end %>
 		<%= item.due_date \
 		    and item.due_date.strftime("%a %b %e") %>
+		<% if item.overdue? then %>
+		  </span>
+		<% end %>
 	      </td>
 	      <% if current_user.is_a? Admin then %>
 		<td>
