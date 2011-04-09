@@ -30,6 +30,9 @@ before_filter :require_user
     end
   end
 
+  # Rejects the current transaction. The code is largely similar to
+  # TransactionsController#approve; it just merely sets a different status and
+  # calls Transaction#cancel instead.
   def reject
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])

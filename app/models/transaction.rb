@@ -38,7 +38,8 @@ class Transaction < ActiveRecord::Base
 
   def approve
   end
-  
+
+  # Cancels the current pending transaction.  
   def cancel
   end
 end
