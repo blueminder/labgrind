@@ -8,20 +8,21 @@
       <th></th>
     <% end %>
   </tr>
-
-<% @labs.each do |lab| %>
-  <tr>
-    <td><%= link_to lab.name, lab %></td>
-    <% if current_user.class_type == "Admin" %>
-      <td><%= link_to 'Edit', edit_lab_path(lab) %></td>
-      <td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
+  
+  <% @labs.each do |lab| %>
+    <tr>
+      <td><%= link_to lab.name, lab %></td>
+      <% if current_user.class_type == "Admin" %>
+	<td><%= link_to 'Edit', edit_lab_path(lab) %></td>
+	<td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', \
+		:method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>
 
 <br />
 
 <% if current_user.class_type == "Admin" %>
-<%= link_to 'New Lab', new_lab_path %>
+  <%= link_to 'New Lab', new_lab_path %>
 <% end %>

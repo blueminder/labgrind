@@ -8,24 +8,24 @@
   <b>Items in this lab:</b>
   <ul>
     <% @lab.items.each do |item| %>
-    <li><%= link_to item.name, item %></li>
+      <li><%= link_to item.name, item %></li>
     <% end %>
   </ul>
 </p>
 
 <% if current_user.class_type == "Admin" %>
-<p>
-  <b>Add item:</b>
-  <%= form_for([@lab, @lab.items.build]) do |f| %>
-  <div class="field">
-    <%= f.label :name %> <br />
-    <%= f.text_field :name %> <br />
-  </div>
-  <div class="action">
-    <%= f.submit %>
-  </div>
-  <% end %>
-</p>
+  <p>
+    <b>Add item:</b>
+    <%= form_for([@lab, @lab.items.build]) do |f| %>
+      <div class="field">
+	<%= f.label :name %> <br />
+	<%= f.text_field :name %> <br />
+      </div>
+      <div class="action">
+	<%= f.submit %>
+      </div>
+    <% end %>
+  </p>
 <% end %>
 
 <% if current_user.class_type == "Admin" %>
