@@ -1,3 +1,5 @@
+# This controller manages user sessions.
+# It is, again, generally Rails boilerplate.
 class UserSessionsController < ApplicationController  
 
   # GET /user_sessions/new

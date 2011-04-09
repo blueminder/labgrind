@@ -1,3 +1,6 @@
+# This controller handles skill-related administrative actions.
+# This is Enrique's domain, but it looks like this is pretty much just more
+# Rails boilerplate.
 class SkillsController < ApplicationController
   before_filter :require_admin
   # GET /skills

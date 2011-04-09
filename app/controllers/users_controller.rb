@@ -1,3 +1,4 @@
+# The controller that handles user-related actions.
 class UsersController < ApplicationController
   before_filter :require_user
   
