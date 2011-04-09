@@ -26,6 +26,7 @@ Labgrind::Application.routes.draw do
   match "/administrators/:id" => 'users#show'
   match "/transactions/status/:status" => "transactions#bystatus"
   match "/transactions/approve" => "transactions#approve"
+  match "/transactions/reject" => "transactions#reject"
 
   root :to => 'user_sessions#new', :as => :login
 

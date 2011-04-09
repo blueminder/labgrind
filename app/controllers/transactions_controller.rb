@@ -30,6 +30,16 @@ before_filter :require_user
     end
   end
 
+  def reject
+    if params[:transaction_id] then
+      t = Transaction.find(params[:transaction_id])
+      t.status = "Cancelled"
+      t.save
+      t.cancel
+      redirect_to transactions_path
+    end
+  end
+
   # POST /transactions
   # POST /transactions.xml
   def create

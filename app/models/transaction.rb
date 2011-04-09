@@ -38,4 +38,7 @@ class Transaction < ActiveRecord::Base
 
   def approve
   end
+  
+  def cancel
+  end
 end
