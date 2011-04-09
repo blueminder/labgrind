@@ -17,7 +17,7 @@
     <% end %>
   </p>
   
-  <% if @user == current_user %>
+  <% if @user == current_user or  current_user.is_a? Admin then %>
     <p>
       <b>Checked Out Items</b>
       <% if @user.items.size == 0 %>
@@ -31,20 +31,23 @@
 	      <td><%= Lab.find_by_id(item.lab_id).name %>
 	      <td>
 		<%= link_to(item.name, item) %>
-	      </td> <td>
-		<%# If the user's an Admin, it screws up the routing information
-                    here. We'll just cast them to a normal User temporarily %>
-		  <% user = @user.becomes(User) %> 
-		  <%= form_for([user, user.transactions.build]) do |f| %>
-		    <div class="action">
-		      <%= f.hidden_field :item_id, {:value => item.id} %>
-		      <%= f.hidden_field :class_type, {:value => "Checkin"} %>
-		      <%= f.hidden_field :status, {:value => "Complete"} %>
-		      <%= f.hidden_field :due_date, {:value => "Eventually"} %>
-		      <%= f.submit :value=> "Check in" %>
-		    </div>
-		  <% end %>
 	      </td>
+	      <% if current_user.is_a? Admin then %>
+		<td>
+		  <%# If the user's an Admin, it screws up the routing
+                      information here. We'll just cast them to a normal User
+		      temporarily %>
+		    <% user = @user.becomes(User) %> 
+		    <%= form_for([user, user.transactions.build]) do |f| %>
+		      <div class="action">
+			<%= f.hidden_field :item_id, {:value => item.id} %>
+			<%= f.hidden_field :class_type, {:value => "Checkin"} %>
+			<%= f.hidden_field :status, {:value => "Complete"} %>
+			<%= f.submit :value=> "Check in" %>
+		      </div>
+		    <% end %>
+		</td>
+	      <% end %>
 	    </tr>
 	  <% end %>
 	</table>
