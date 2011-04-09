@@ -92,8 +92,8 @@
 </p>
 <% end %>
 
-<%# For whatever reason, I get an extra annotation? Empty lists come back %>
-<%# has having one item, so I guess we should ignore all 1-item lists. %>
+<%# For whatever reason, I get an extra annotation? Empty lists come back
+    as having one item, so I guess we should ignore all 1-item lists. %>
 <% unless @item.annotations.length <= 1 then %>
 <p>
   <b>Notes and Annotations:</b> <br />

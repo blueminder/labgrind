@@ -8,21 +8,22 @@
       <th></th>
     <% end %>
   </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td>
-    <%= link_to user.username, user_path(user) %>
-    <% if current_user == user %>
-      <b>* </b>
-    <% end %>
-    </td>
-    <% if current_user.is_a? Admin %>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <td><%= link_to 'Destroy', user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
-  </tr>
-<% end %>
+  
+  <% @users.each do |user| %>
+    <tr>
+      <td>
+	<%= link_to user.username, user_path(user) %>
+	<% if current_user == user %>
+	  <b>* </b>
+	<% end %>
+      </td>
+      <% if current_user.is_a? Admin %>
+	<td><%= link_to 'Edit', edit_user_path(user) %></td>
+	<td><%= link_to 'Destroy', user_path(user), \
+		:confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>
 
 <br />
