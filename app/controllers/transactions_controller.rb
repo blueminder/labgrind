@@ -38,7 +38,7 @@ before_filter :require_user
       transaction = item.transactions.create(params[:transaction])
       path = item_path(item)
     elsif params[:user_id] then
-      user = User.find(params[:user_id])
+      user = User.find_by_username(params[:user_id])
       transaction = user.transactions.create(params[:transaction])
       path = user_path(user)
     end

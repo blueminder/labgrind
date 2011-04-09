@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Username:</b><br>
+<h2>
   <%= @user.username %>
-</p>
+</h2>
 
+<div id="content">
 <p>
-  <b>Email:</b><br>
+  <b>Email</b><br>
   <%= @user.email %>
 </p>
 
 <p>
-  <b>User Skills:</b><br>
+  <b>User Skills</b><br>
   <% @user.skills.each do |skill| %>
     <%= skill.name %> <br>
   <% end %>
@@ -19,10 +19,16 @@
 
 <% if @user == current_user %>
 <p>
-  <b>Items Checked Out:</b>
+  <b>Checked Out Items</b>
+  <% if @user.items.size == 0 %>
+  <br>No items are currently checked out.
+  <% else %>
   <table>
+    <tr> <th>Lab</th> <th>Item Name</th> <th></th> </tr>
     <% @user.items.each do |item| %>
+    
     <tr>
+      <td><%= Lab.find_by_id(item.lab_id).name %>
       <td>
 	<%= link_to(item.name, item) %>
       </td> <td>
@@ -42,12 +48,13 @@
     </tr>
     <% end %>
   </table>
+  <% end %>
 </p>
 
 <p>
-  <b>Transaction Log:</b>
+  <b>Past Transactions</b>
   <table>
-    <tr> <th> Type </th> <th> Status </th> <th> Datetime </th> </tr>
+    <tr> <th> Type </th> <th> Status </th> <th> Time </th> </tr>
     <% @user.transactions.reverse.each do |t| %>
     <tr>
       <td>
@@ -65,8 +72,10 @@
   </table>
 </p>
 <% end %>
+</div>
 
-<% if @user == current_user %>
+<% if current_user.is_a? Admin %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>
-<%= link_to 'Back', users_path %>
+
+<%= link_to 'View All Members', users_path %>

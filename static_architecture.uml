@@ -1,0 +1,62 @@
+digraph staticArchitecture {
+        overlap = false
+        fontsize = 10
+        rankdir = "TB"
+
+        edge [ fontsize = 8 ]
+
+        subgraph clusterServer {
+            bgcolor = "#cccccc"
+            subgraph clusterRails {
+                     label = "Ruby on Rails"
+                     bgcolor = "#eeeeee"
+                     subgraph {
+                         rank = "same"
+                         Database [label = "Database"]
+                         ActiveRecord [label = "ActiveRecord"]
+                         Server [label = "Web server"]
+                     }
+
+            }
+
+            subgraph clusterLabgrind {
+                     label = "Labgrind (our software)"
+                     bgcolor = "#ffffcc"
+                     subgraph {
+                         rank = "source"
+                         Controllers [label = "Controller classes"]
+                         Views [label = "Ruby-embedded HTML views"]
+                         Models [label = "Model classes"]
+                     }
+            }
+        }
+
+
+        subgraph {
+            rank = "sink"
+
+            Client [label = "Client Web Browser"
+                    shape = tripleoctagon ]
+        }
+
+        Internet [
+                 label = "The Internet"
+                 shape = egg
+                 ]
+
+
+        Client -> Internet [label = "Requests page"]
+        Internet -> Client [label = "Returns page"]
+        Server -> Internet [label = "Requests page"
+                            dir = back ]
+        Server -> Internet [label = "Returns page"]
+        Server -> Controllers [label = "Passes request to"]
+        Controllers -> ActiveRecord [label = "Gets models from"]
+        ActiveRecord -> Database [label = "Stores data in"]
+        Database -> ActiveRecord [label = "Returns data to"]
+        Models -> ActiveRecord [label = "Retrieves objects for"
+                                dir = back]
+        Models -> Controllers [label = "Returns data to"]
+        Controllers -> Views [label = "Passes data to"]
+        Views -> Server [label = "Renders Webpage"]
+} 
