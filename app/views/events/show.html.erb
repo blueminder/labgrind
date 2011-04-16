@@ -1,0 +1,21 @@
+<p id="notice"> <%= notice %> </p>
+
+<h3> <%= @event.name %> </h3>
+<p>
+  <strong> Starts: </strong>
+  <%= @event.start %>
+</p>
+<p>
+  <strong> Ends: </strong>
+  <%= @event.end %>
+</p>
+<% if @event.exclusive then %>
+  <p> <strong> Lab is reserved during this event </strong> </p>
+<% end %>
+<p> <%= @event.description %> </p>
+
+<%= if current_user.is_a? Admin then
+      link_to 'Edit', edit_event_path(@event)
+    end %>
+<br />
+<%= link_to 'Back', events_path %>

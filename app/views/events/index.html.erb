@@ -1,0 +1,26 @@
+<h1> All Calendar Events </h1>
+
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Starts </th>
+    <th> Ends </th>
+    <th> Exclusive? </th>
+  </tr>
+
+  <% @events.each do |event| %>
+    <tr>
+      <td> <%= link_to event.name, event %> </td>
+      <td> <%= event.start %> </td>
+      <td> <%= event.end %> </td>
+      <td> <%= event.exclusive ? "YES" : "NO" %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<%= if current_user.is_a? Admin then
+      link_to "New Event", new_event_path
+    end %>
+
+ 
