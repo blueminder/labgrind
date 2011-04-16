@@ -9,6 +9,10 @@
   <strong> Ends: </strong>
   <%= @event.end %>
 </p>
+<% if @event.lab then %>
+  <p> In <strong> <%= link_to @event.lab.name, @event.lab %> </strong> </p>
+<% end %>
+
 <% if @event.exclusive then %>
   <p> <strong> Lab is reserved during this event </strong> </p>
 <% end %>

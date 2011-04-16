@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th> Name </th>
+    <th> Lab </th>
     <th> Starts </th>
     <th> Ends </th>
     <th> Exclusive? </th>
@@ -11,6 +12,7 @@
   <% @events.each do |event| %>
     <tr>
       <td> <%= link_to event.name, event %> </td>
+      <td> <%= event.lab and link_to event.lab.name, event.lab %> </td>
       <td> <%= event.start %> </td>
       <td> <%= event.end %> </td>
       <td> <%= event.exclusive ? "YES" : "NO" %> </td>
