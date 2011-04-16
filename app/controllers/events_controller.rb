@@ -39,11 +39,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save then
         format.html {redirect_to(@event, :notice => "Event created")}
-        format.xml  { render :xml => @item, :status => :created, \
-          :location => @item }
+        format.xml  { render :xml => @event, :status => :created, \
+          :location => @event }
         else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @item.errors, \
+        format.xml  { render :xml => @event.errors, \
           :status => :unprocessable_entity }
       end
     end

@@ -18,4 +18,15 @@ class Event < ActiveRecord::Base
   def conflicts_with? other
     lab == other.lab and overlaps? other and (exclusive or other.exclusive)
   end
+
+  def validate
+    conflicting_event = Event.all.find {|e| conflicts_with? e}
+    if conflicting_event then
+      errors.add_to_base "Could not create event; " +
+        "conflicts with #{conflicting_event.name} "+
+        "(#{conflicting_event.start_time} to #{conflicting_event.end_time})"
+    else
+      super.validate
+    end
+  end
 end
