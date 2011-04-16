@@ -17,6 +17,13 @@
   <% end %>
 </p>
 
+<p>
+  <b>Projects</b><br>
+  <% @user.projects.each do |project| %>
+    <%= project.name %> <br>
+  <% end %>
+</p>
+
 <% if @user == current_user %>
 <p>
   <b>Checked Out Items</b>

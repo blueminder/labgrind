@@ -21,6 +21,7 @@
     <% if current_user %>
     <p>
       <%= link_to "Members", :users %><br>
+      <%= link_to "Projects", :projects %><br>
       <%= link_to "Laboratories", :labs %><br>
       <%= link_to "Inventory", :items %><br><br>
       <% if current_user.is_a? Admin %>

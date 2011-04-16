@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :annotations
   has_many :transactions
   has_many :items
+  has_many :project_assignments
+  has_many :projects, :through => :project_assignments
 
   attr_accessor :skill_list
   after_save :update_skills
