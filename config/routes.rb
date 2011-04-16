@@ -19,6 +19,8 @@ Labgrind::Application.routes.draw do
 
   resources :user_sessions, :skills
 
+  resources :events
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'inventory' => 'items#index'

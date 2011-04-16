@@ -32,6 +32,10 @@
 	<td>
 	  <%= form_tag (url_for(:action => "approve", \
 				:controller => "transactions")) do %>
+	    Due on:
+	    <%= date_select :transaction_date, :due_date, \
+		:start_year => Time.now.year, :end_year => Time.now.year + 1, \
+		:default => Time.now + 60 * 60 * 24 * 7 %>
 	    <%= hidden_field_tag(:transaction_id, t.id) %>
 	    <%= submit_tag "Approve" %>
 	  <% end %>
