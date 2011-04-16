@@ -4,4 +4,5 @@
 # meaning the lab can be reserved for that period of time, and (TODO) it can
 # also be tied to a specific project.
 class Event < ActiveRecord::Base
+  belongs_to :lab
 end
