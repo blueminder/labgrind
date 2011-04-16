@@ -39,8 +39,8 @@
   <% @lab.events.each do |event| %>
     <tr>
       <td> <%= link_to event.name, event %> </td>
-      <td> <%= event.start %> </td>
-      <td> <%= event.end %> </td>
+      <td> <%= event.start_time %> </td>
+      <td> <%= event.end_time %> </td>
       <td> <%= event.exclusive ? "YES" : "NO" %> </td>
     </tr>
   <% end %>

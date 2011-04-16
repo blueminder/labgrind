@@ -13,8 +13,8 @@
     <tr>
       <td> <%= link_to event.name, event %> </td>
       <td> <%= event.lab and link_to event.lab.name, event.lab %> </td>
-      <td> <%= event.start %> </td>
-      <td> <%= event.end %> </td>
+      <td> <%= event.start_time %> </td>
+      <td> <%= event.end_time %> </td>
       <td> <%= event.exclusive ? "YES" : "NO" %> </td>
     </tr>
   <% end %>

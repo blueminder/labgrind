@@ -3,11 +3,11 @@
 <h3> <%= @event.name %> </h3>
 <p>
   <strong> Starts: </strong>
-  <%= @event.start %>
+  <%= @event.start_time %>
 </p>
 <p>
   <strong> Ends: </strong>
-  <%= @event.end %>
+  <%= @event.end_time %>
 </p>
 <% if @event.lab then %>
   <p> In <strong> <%= link_to @event.lab.name, @event.lab %> </strong> </p>
