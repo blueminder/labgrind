@@ -28,6 +28,24 @@
   </p>
 <% end %>
 
+<strong> Events in this lab </strong>
+<table>
+  <tr>
+    <th> Name </th>
+    <th> Starts </th>
+    <th> Ends </th>
+    <th> Reserved? </th>
+  </tr>
+  <% @lab.events.each do |event| %>
+    <tr>
+      <td> <%= link_to event.name, event %> </td>
+      <td> <%= event.start %> </td>
+      <td> <%= event.end %> </td>
+      <td> <%= event.exclusive ? "YES" : "NO" %> </td>
+    </tr>
+  <% end %>
+</table>
+
 <% if current_user.class_type == "Admin" %>
   <%= link_to 'Edit', edit_lab_path(@lab) %> |
 <% end %>
