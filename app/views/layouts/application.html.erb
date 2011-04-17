@@ -8,11 +8,12 @@
   </head>
   <body>
     
-    
+
     
     <div id="nav">
       <% if current_user %>
-	<%= link_to "Edit Your Profile", edit_user_path(current_user) %> | 
+	<%= link_to "Edit Your Profile", edit_user_path(current_user) %>
+	| 
 	<%= link_to "Logout", :logout %>
       <% else %>
 	<%= link_to "Register", new_user_path %> | 
@@ -21,6 +22,7 @@
       <% if current_user %>
 	<p>
 	  <%= link_to "Members", :users %><br>
+	  <%= link_to "Projects", :projects %><br>
 	  <%= link_to "Laboratories", :labs %><br>
 	  <%= link_to "Inventory", :items %><br><br>
 	  <% if current_user.is_a? Admin %>

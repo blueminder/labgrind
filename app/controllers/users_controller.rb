@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def get_all_skills
     @skills = Skill.find(:all)
   end
+  
+  def get_all_projects
+    @projects = Project.find(:all)
+  end
 
   # GET /users
   # GET /users.xml
@@ -42,6 +46,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     get_all_skills
+    get_all_projects
     @user = User.find_by_username(params[:id])
   end
 
@@ -50,6 +55,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     get_all_skills
+    get_all_projects
 
     respond_to do |format|
       if @user.save
@@ -67,6 +73,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_username(params[:id])
     get_all_skills
+    get_all_projects
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

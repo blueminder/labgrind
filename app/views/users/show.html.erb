@@ -17,6 +17,13 @@
     <% end %>
   </p>
   
+  <p>
+    <b>Projects</b><br>
+    <% @user.projects.each do |project| %>
+      <%= link_to project.name, project %> <br>
+    <% end %>
+  </p>
+  
   <% if @user == current_user or  current_user.is_a? Admin then %>
     <p>
       <b>Checked Out Items</b>
