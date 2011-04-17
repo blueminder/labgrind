@@ -5,6 +5,7 @@ matt:
   password_salt: ????
   persistence_token: ????
   type: Admin
+  skills: breathing, procrastination
 
 enrique:
   username: enrique
@@ -13,6 +14,7 @@ enrique:
   password_salt: ????
   persistence_token: ????
   type: Admin
+  skills: breathing, welding, procrastination
 
 joshua:
   username: joshua
@@ -20,6 +22,7 @@ joshua:
   crypted_password: ????
   password_salt: ????
   persistence_token: ????
+  skills: breathing, welding
 
 tim:
   username: tim
@@ -27,3 +30,4 @@ tim:
   crypted_password: ????
   password_salt: ????
   persistence_token: ????
+  skills: breathing, welding

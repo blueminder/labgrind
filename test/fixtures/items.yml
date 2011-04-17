@@ -17,10 +17,12 @@ rover:
 apollo:
   name: Apollo 13 Video Set
   lab: moonbase
+  user: enrique
 
 accel:
   name: High-Energy Particle Accelerator
   lab: nasa
+  user: joshua
 
 accel2:
   name: Higher-Energy Particle Accelerator
