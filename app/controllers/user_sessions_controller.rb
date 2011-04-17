@@ -5,6 +5,11 @@ class UserSessionsController < ApplicationController
   # GET /user_sessions/new
   # GET /user_sessions/new.xml
   def new
+	if User.count == 0
+	  @user = Admin.new
+	  render :init_config
+	  return
+	end
     @user_session = UserSession.new
 
     respond_to do |format|

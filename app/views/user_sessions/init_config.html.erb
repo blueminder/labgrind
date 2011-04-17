@@ -1,0 +1,38 @@
+<%= form_for @user, :as => "user", :url => "/users" do |f| %>
+  <h2>Initial server configuration</h2>
+  <p>If you are seeing this page, then you have successfully configured your
+     web server. Before we continue, we need to prefill the database with an
+	 administrator. Please enter the fields below.</p>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_session.errors.count, "error") %>
+	prohibited initial configuration:</h2>
+      
+      <ul>
+	<% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+	<% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>
