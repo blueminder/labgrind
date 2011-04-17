@@ -14,12 +14,14 @@ class Item < ActiveRecord::Base
     # array won't work. We use this approach because the "phantom" elements
     # seem to have every field nil, so using created_at is a reliable test of
     # whether or not someone actually created the annotation.
-    transactions.reverse.find{|t| not t.created_at.nil?}
+    transactions.reject{|t| t.created_at.nil?}.sort_by{|a| a.created_at}[-1]
   end
 
   # Tests whether or not the item's currently checked out.
   def checked_out?
-    not user.nil?
+    last_transaction and
+      last_transaction.is_a? Checkout and
+      last_transaction.complete?
   end
 
   # Tests whether or not someone's requested this item for checkout. Ideally,
@@ -28,10 +30,9 @@ class Item < ActiveRecord::Base
   # just that someone did. If you want the user, you should use
   # last_transaction.user.
   def checkout_requested?
-    not last_transaction.nil? \
-    and last_transaction.is_a? Checkout \
-    and not last_transaction.complete? \
-	and not last_transaction.cancelled?
+    last_transaction and
+      last_transaction.is_a? Checkout and
+      last_transaction.pending?
   end
 
   # If this item is checked out, figure out when it's due to be returned.

@@ -1,9 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+welding:
+  name: Welding
+  description: Welding stuff together without catching other stuff on fire
 
-one:
-  name: MyString
-  description: MyText
+breathing:
+  name: Breathing
+  description: You know, not dying
 
-two:
-  name: MyString
-  description: MyText
+procrastination:
+  name: Procrastination
+  description: I'll describe it later

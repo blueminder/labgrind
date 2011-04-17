@@ -1,9 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  text: MyString
-  item: 
+  text: The laser doesn't work
+  item: lasercutter
+  user: joshua
+  id: 1
 
 two:
-  text: MyString
-  item: 
+  text: Fixed laser, it should work now
+  item: lasercutter
+  user: enrique 
+  id: 2

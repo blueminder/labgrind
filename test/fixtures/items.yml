@@ -1,9 +1,31 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+lasercutter:
+  name: Laser Cutter
+  lab: coc 
 
-one:
-  name: MyString
-  lab: 
+bettercutter:
+  name: Better Laser Cutter
+  lab: coc
 
-two:
-  name: MyString
-  lab: 
+moonlaser:
+  name: Moon Laser
+  lab: moonbase
+
+rover:
+  name: Moon Rover
+  lab: moonbase
+
+apollo:
+  name: Apollo 13 Video Set
+  lab: moonbase
+
+accel:
+  name: High-Energy Particle Accelerator
+  lab: nasa
+
+accel2:
+  name: Higher-Energy Particle Accelerator
+  lab: nasa
+
+accel3:
+  name: Highest-Energy Particle Accelerator
+  lab: nasa
