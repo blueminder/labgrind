@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h1><%= @project.name %></h1>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @project.description %>
+</p>
+
+<p>
+  <b>Owners</b><br>
+  <% @owners.each do |assignment| %>
+    <%= User.find(assignment.user_id).username %> <br>
+  <% end %>
+</p>
+
+<p>
+  <b>Members</b><br>
+  <% @project.users.each do |user| %>
+    <% user = user.becomes(User) %> 
+    <%= user.username %> <br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
