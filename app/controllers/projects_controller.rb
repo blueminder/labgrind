@@ -1,3 +1,4 @@
+# The controller for projects.
 class ProjectsController < ApplicationController
   before_filter :require_user
   

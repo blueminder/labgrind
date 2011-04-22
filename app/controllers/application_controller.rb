@@ -1,4 +1,10 @@
 # The base controller for all controllers in this application.
+# Also this, is how authentication itself works. If you wish to disable access
+# to a project, if not logged in (which you should always do unless you don't),
+# you want to add
+# before_filter :require_user
+# If you want to limit it for only some methods, you want:
+# before_filter :require_user, :except => [:new, :create]
 class ApplicationController < ActionController::Base
 
   # I don't know what this does, but I'm assuming it protects this controller
@@ -24,9 +30,8 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record
   end
 
-  # Requires that someone is actually logged in. This can be used in a
-  # controller to restrict access to a whole host of actions, or in individual
-  # views to restrict certain pages. 
+  # Prohibits access to this page for anyone not currently logged in. If not
+  # logged on, it redirects to new_user_session_url.
   def require_user
     unless current_user
       flash[:notice] = "You must be logged in to access this page"
@@ -36,6 +41,7 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  # Prohibits access to this page except to a specific user or lab admin.
   def require_specific_user(user)
     unless current_user == user or current_user.is_admin?
       flash[:notice] = "Only #{user.username} can see their own details"
@@ -45,7 +51,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  # Similar to require_user, except that the user must also be an admin.
+  # Prohibits access to this page unless the current user is a site
+  # administrator or a lab admin.
   def require_admin
     unless current_user.is_admin?
       flash[:notice] = "You must be some sort of administrator to access this page"
@@ -55,6 +62,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  # Prohibits access to this page unless the current user is a site
+  # administrator
   def require_super_admin
     unless current_user.is_super_admin?
       flash[:notice] = "You must be a super-administrator to access this page"
@@ -64,6 +73,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  # Prohibits access to this page unless the current user is a lab admin
+  # for the appropriate lab.
   def require_lab_admin(lab)
     unless current_user.administers_lab?(lab)
       flash[:notice] =
@@ -74,6 +85,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  # Prohibits access to this page unless the current user is a project owner
+  # or a site administrator.
   def require_project_owner(project)
     unless current_user.owns? project or current_user.is_super_admin?
       flash[:notice] = 
@@ -84,8 +97,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  # Requires that nobody is logged in. If someone is logged in, this redirects
-  # them to the user main page instead.
+  # Prohibits access to this page if the user is logged in. In other words,
+  # this should be required only for the login or registration pages.
   def require_no_user
     if current_user
       store_location
