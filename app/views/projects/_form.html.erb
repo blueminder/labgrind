@@ -19,6 +19,15 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  
+  <div class="field">
+    Add/Remove Members<br />
+    <% users_array = User.all.map { |user| [user.username, user.id] } %>
+    <% p_users_array = @project.users.map { |user| User.find(user.id).becomes(User).id.to_i } %>
+    <% owners_array = @project.owners.map { |user| User.find(user.id).becomes(User).id.to_i } %>
+    <%= select_tag('members[]', options_for_select(users_array, :selected => p_users_array, :disabled => owners_array), :multiple => true, :size => 5) %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -38,6 +38,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @users = User.all
+    @owners = ProjectAssignment.find(:all, :conditions => { :project_id => @project.id, :owner => 1 })
+    @passed_owners = params[:owners]
   end
 
   # POST /projects
@@ -65,7 +68,22 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
+        @passed_members = params[:members]
+        @passed_owners = params[:owners]
+        
+        p_users_array = @project.users.map { |user| User.find(user.id).becomes(User).id.to_i }
+        
+        @project.users = @project.users - @project.owners
+        
+        if !@passed_members.nil?
+          @passed_members.each do |member|
+            if !@project.users.include?(member)
+              @project.users << User.find(member.to_i)
+            end
+          end
+        end
+        
+        format.html { redirect_to(@project, :notice => 'Project successfully updated') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

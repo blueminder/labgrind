@@ -9,4 +9,9 @@ class Project < ActiveRecord::Base
     assignment.save
   end
   
+  def owners
+    assignments = ProjectAssignment.find(:all, :conditions => { :project_id => self.id, :owner => 1 })
+    assignments.collect{ |a| User.find(a.user_id) }
+  end
+  
 end
