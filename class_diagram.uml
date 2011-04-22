@@ -29,7 +29,11 @@ digraph Classes {
         AnnotationsController [
 			      label = "{AnnotationsController||+create() : void}"
                               ]
-    
+
+        EventsController [
+			label = "{EventsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
+                        ]    
+
         ItemsController [
 			label = "{ItemsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
                         ]
@@ -38,6 +42,10 @@ digraph Classes {
 		       label = "{LabsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
                        ]
     
+        ProjectsController [
+			label = "{ProjectsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
+                        ]
+
         SkillsController [
 			 label = "{SkillsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
                          ]
@@ -71,6 +79,10 @@ digraph Classes {
         Checkout [
                      label = "{Checkout||}"
              ]
+
+	Event [
+	      label = "{Event|+name : string\l+description : string\l+start_time : datetime\l+end_time : datetime\l+exclusive : boolean\l+created_at : datetime\l+updated_at : datetime\l|+overlaps?(Event) : boolean\l+conflicts_with?(Event) : boolean\l+validate() : void\l}"
+	      ]
     
         Item [
                  label = "{Item|+name : string\l+created_at : datetime\l+description: string\l|+last_transaction() : Transaction\l+checked_out?() : boolean\l+checkout_requested?() : boolean\l}"
@@ -80,6 +92,10 @@ digraph Classes {
                 label = "{Lab|+name : string\l+created_at : datetime\l|}"
         ]
     
+        Project [
+		label = "{Project|+name : string\l+description : string\l|}"
+	]
+
         Skill [
                   label = "{Skill|+name : string\l+description : string\l+created_at : datetime\l|}"
           ]
@@ -108,6 +124,9 @@ digraph Classes {
          ]
     Lab -> Item
 
+    Lab -> Event
+    Project -> Event
+
     edge [
          len = 2.0
          ]
@@ -127,6 +146,7 @@ digraph Classes {
          len = 1.0
          ]
     User -> Skill
+    User -> Project
 
     edge [
          headlabel = "1"
@@ -141,6 +161,8 @@ digraph Classes {
     AnnotationsController -> Annotation
     UserSessionsController -> UserSession
     SkillsController -> Skill
+    EventsController -> Event
+    ProjectsController -> Project
 
     edge [
           arrowhead = "empty"
@@ -155,6 +177,8 @@ digraph Classes {
     AnnotationsController -> ApplicationController
     UserSessionsController -> ApplicationController
     SkillsController -> ApplicationController
+    EventsController -> ApplicationController
+    ProjectsController -> ApplicationController
 
     
 
