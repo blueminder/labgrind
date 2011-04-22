@@ -67,7 +67,8 @@ class UsersController < ApplicationController
         format.html { redirect_to(:users, :notice => 'Registration successful.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
 	  elsif params[:make_admin]
-		  format.html { render 'user_sessions/init_config' }
+		  # Admins will get redirected to the labs_url to make more stuff
+		  format.html { render labs_url }
 	  else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }

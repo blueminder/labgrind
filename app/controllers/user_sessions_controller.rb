@@ -1,6 +1,7 @@
 # This controller manages user sessions.
 # It is, again, generally Rails boilerplate.
 class UserSessionsController < ApplicationController  
+	before_filter :require_no_user, :except => [:create, :destroy]
 
   # GET /user_sessions/new
   # GET /user_sessions/new.xml

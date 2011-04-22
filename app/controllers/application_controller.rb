@@ -46,14 +46,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Requires that nobody is logged in. This is mostly useful to ensure that
-  # alredy logged-in users don't try to log in again (until they log out first,
-  # at least).
+  # Requires that nobody is logged in. If someone is logged in, this redirects
+  # them to the user main page instead.
   def require_no_user
     if current_user
       store_location
       flash[:notice] = "You must be logged out to access this page"
-      redirect_to account_url
+      redirect_to user_path(current_user)
       return false
     end
   end
