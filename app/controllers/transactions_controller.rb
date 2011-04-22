@@ -7,8 +7,14 @@ class TransactionsController < ApplicationController
   # GET /transactions.xml
   # Shows an index listing all transactions.
   def index
-    @transactions = Transaction.all
+    return false unless require_admin
 
+    @transactions = Transaction.all
+    
+    unless current_user.is_super_admin?
+      @transactions = @transactions.select{|t| t.item.lab == current_user.lab}
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @items }
@@ -18,7 +24,13 @@ class TransactionsController < ApplicationController
   # Shows an index of all transactions that share some status, such as all
   # pending transactions.
   def bystatus
+    return false unless require_admin
+    
     @transactions = Transaction.where(:status => params[:status].capitalize)
+
+    unless current_user.is_super_admin?
+      @transactions = @transactions.select{|t| t.item.lab == current_user.lab}
+    end
 
     respond_to do |format|
       format.html
@@ -32,6 +44,9 @@ class TransactionsController < ApplicationController
     puts params.inspect
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])
+      
+      return false unless require_lab_admin(t.lab)
+
       if (params[:transaction_date]) then
         # Code here shamelessly stolen from the Internet
         # Instead of manually unpacking the date args, let Ruby do it
@@ -53,6 +68,9 @@ class TransactionsController < ApplicationController
   def reject
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])
+
+      return false unless require_lab_admin(t.lab)
+
       t.status = "Cancelled"
       t.save
       t.cancel

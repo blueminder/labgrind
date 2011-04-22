@@ -44,6 +44,12 @@ class ItemsController < ApplicationController
   # Edits an existing item.
   def edit
     @item = Item.find(params[:id])
+
+    if @item.lab then
+      return false unless require_lab_admin(@item.lab)
+    else
+      return false unless require_super_admin(@item.lab)
+    end
   end
 
   # POST /items
@@ -58,6 +64,12 @@ class ItemsController < ApplicationController
     else
       # This is just the generic create, called from the item view.
       @item = Item.new(params[:item])
+
+      if @item.lab then
+        return false unless require_lab_admin(@item.lab)
+      else
+        return false unless require_super_admin(@item.lab)
+      end
 
       respond_to do |format|
         if @item.save
@@ -77,6 +89,12 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
 
+    if @item.lab then
+      return false unless require_lab_admin(@item.lab)
+    else
+      return false unless require_super_admin(@item.lab)
+    end
+
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
@@ -93,6 +111,13 @@ class ItemsController < ApplicationController
   # Deletes an item.
   def destroy
     @item = Item.find(params[:id])
+
+    if @item.lab then
+      return false unless require_lab_admin(@item.lab)
+    else
+      return false unless require_super_admin(@item.lab)
+    end
+
     @item.destroy
 
     respond_to do |format|

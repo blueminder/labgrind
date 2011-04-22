@@ -38,6 +38,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+
+    return false unless require_project_owner(@project)
+
     @users = User.all
     @owners = ProjectAssignment.find(:all, :conditions => { :project_id => @project.id, :owner => 1 })
     @passed_owners = params[:owners]
@@ -65,6 +68,8 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
+
+    return false unless require_project_owner(@project)
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -96,6 +101,9 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.xml
   def destroy
     @project = Project.find(params[:id])
+
+    return false unless require_project_owner(@project)
+
     @project.destroy
 
     respond_to do |format|

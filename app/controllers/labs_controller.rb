@@ -39,12 +39,16 @@ class LabsController < ApplicationController
   # GET /labs/1/edit
   def edit
     @lab = Lab.find(params[:id])
+
+    return false unless require_lab_admin(@lab)
   end
 
   # POST /labs
   # POST /labs.xml
   def create
     @lab = Lab.new(params[:lab])
+
+    return false unless require_lab_admin(@lab)
 
     respond_to do |format|
       if @lab.save
@@ -62,6 +66,8 @@ class LabsController < ApplicationController
   def update
     @lab = Lab.find(params[:id])
 
+    return false unless require_lab_admin(@lab)
+
     respond_to do |format|
       if @lab.update_attributes(params[:lab])
         format.html { redirect_to(@lab, :notice => 'Lab was successfully updated.') }
@@ -77,6 +83,9 @@ class LabsController < ApplicationController
   # DELETE /labs/1.xml
   def destroy
     @lab = Lab.find(params[:id])
+    
+    return false unless require_lab_admin(@lab)
+
     @lab.destroy
 
     respond_to do |format|

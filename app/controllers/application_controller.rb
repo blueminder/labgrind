@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
       redirect_back_or_default(new_user_session_url)
       return false
     end
+    true
   end
 
   # Similar to require_user, except that the user must also be an admin.
@@ -42,6 +43,7 @@ class ApplicationController < ActionController::Base
       redirect_back_or_default(current_user)
       return false
     end
+    true
   end
 
   def require_super_admin
@@ -50,6 +52,7 @@ class ApplicationController < ActionController::Base
       redirect_back_or_default(current_user)
       return false
     end
+    true
   end
 
   def require_lab_admin(lab)
@@ -59,6 +62,7 @@ class ApplicationController < ActionController::Base
       redirect_back_or_default(current_user)
       return false
     end
+    true
   end
 
   def require_project_owner(project)
@@ -68,6 +72,7 @@ class ApplicationController < ActionController::Base
       redirect_back_or_default(current_user)
       return false
     end
+    true
   end
 
   # Requires that nobody is logged in. This is mostly useful to ensure that
@@ -80,6 +85,7 @@ class ApplicationController < ActionController::Base
       redirect_to current_user
       return false
     end
+    true
   end
   
   # Saves the URL that the user's at right now. The user can later be redirected
