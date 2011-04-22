@@ -32,6 +32,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </div>
+  <%= hidden_field_tag(:make_admin, "1") %>
   <div class="actions">
     <%= f.submit "Create" %>
   </div>

@@ -53,7 +53,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
+	if User.count == 0 and params[:make_admin]
+		# Make a new admin if and only if no other users
+		@user = Admin.new(params[:user])
+	else
+	    @user = User.new(params[:user])
+	end
     get_all_skills
     get_all_projects
 
