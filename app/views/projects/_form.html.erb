@@ -1,3 +1,19 @@
+<script language="javascript" type="text/javascript">
+
+  //Selected Items from Source -> Destination   
+  function move_list_items(sourceid, destinationid)
+  {
+    $("#"+sourceid+"  option:selected").appendTo("#"+destinationid);
+  }
+
+  //All items from Source -> Destination
+  function move_list_items_all(sourceid, destinationid)
+  {
+    $("#"+sourceid+" option").appendTo("#"+destinationid);
+  }
+   
+</script>
+
 <%= form_for(@project) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
@@ -21,11 +37,50 @@
   </div>
   
   <div class="field">
-    Add/Remove Members<br />
+    Manage Project Members<br />
     <% users_array = User.all.map { |user| [user.username, user.id] } %>
-    <% p_users_array = @project.users.map { |user| User.find(user.id).becomes(User).id.to_i } %>
-    <% owners_array = @project.owners.map { |user| User.find(user.id).becomes(User).id.to_i } %>
-    <%= select_tag('members[]', options_for_select(users_array, :selected => p_users_array, :disabled => owners_array), :multiple => true, :size => 5) %>
+    <% p_users_array = @project.users.map { |user| [user.username, user.id] } %>
+    <% owners_array = @project.owners.map { |user| [user.username, user.id] } %>
+    <% p_users_array = p_users_array - owners_array %>
+    <% displayed_users_array = users_array - p_users_array - owners_array %>
+    
+    <table style="border: 1px solid black;">
+    <tr>
+    <th style="border: none;">Available Users</th>
+    <th style="border: none;"></th>
+    <th style="border: none;">Current Members</th>
+    <th style="border: none;"></th>
+    <th style="border: none;">Project Owners</th>
+    </tr>
+    <tr>
+    <td style="border: none;">
+    <%= select_tag('all_users[]', options_for_select(displayed_users_array), :multiple => true, :size => 5) %>
+    </td>
+    <td style="border: none;">
+    <center>
+      <input id="moveright" type="button" value=">" onclick="move_list_items('all_users_','members_');" /><br> 
+      <input id="moveleft" type="button" value="<" onclick="move_list_items('members_','all_users_');" /><br><br>
+      <input id="moveleftall" type="button" value="<<" onclick="move_list_items_all('members_','all_users_');" /> <br>
+      <input id="moverightall" type="button" value=">>" onclick="move_list_items_all('all_users_','members_');" />
+      </center>
+    </td>
+    <td style="border: none;">
+    <%= select_tag('members[]', options_for_select(p_users_array), :multiple => true, :size => 5) %>
+    </td>
+    <td style="border: none;">
+      <center>
+        <input id="moveright" type="button" value=">" onclick="move_list_items('members_','owners_');" /><br>
+        <input id="moveleft" type="button" value="<" onclick="move_list_items('owners_','members_');" /><br><br>
+        <input id="moveleftall" type="button" value="<<" onclick="move_list_items_all('owners_','members_');" /><br>
+        <input id="moverightall" type="button" value=">>" onclick="move_list_items_all('members_','owners_');" />
+      </center>
+   
+    </td>
+    <td style="border: none;">
+    <%= select_tag('owners[]', options_for_select(owners_array), :multiple => true, :size => 5) %>
+    </td>
+    </tr>
+    </table>
   </div>
   
   <div class="actions">
