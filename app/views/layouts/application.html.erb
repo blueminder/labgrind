@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>labgrind</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
+  <head>
+    <title>labgrind</title>
+    <%= stylesheet_link_tag :all %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    
 
-
-
-  <div id="nav">
-    <% if current_user %>
-      <%= link_to "Edit Your Profile", edit_user_path(current_user) %> | 
-      <%= link_to "Logout", :logout %>
-    <% else %>
-      <%= link_to "Register", new_user_path %> | 
-      <%= link_to "Login", :login %>
-    <% end %>
-    <% if current_user %>
-    <p>
-      <%= link_to "Members", :users %><br>
-      <%= link_to "Projects", :projects %><br>
-      <%= link_to "Laboratories", :labs %><br>
-      <%= link_to "Inventory", :items %><br><br>
-      <% if current_user.is_a? Admin %>
-        <b>Administrator Menu</b><br>
-        <%= link_to "Transactions", :transactions %><br>
+    
+    <div id="nav">
+      <% if current_user %>
+	<%= link_to "Edit Your Profile", edit_user_path(current_user) %>
+	| 
+	<%= link_to "Logout", :logout %>
+      <% else %>
+	<%= link_to "Register", new_user_path %> | 
+	<%= link_to "Login", :login %>
       <% end %>
-    </p>
-    <% end %>
-  </div>
-  
-  <div id="head">
-    <b>labgrind</b> 
-    <% if current_user %>
-      - Logged in as <%= link_to current_user.username, user_path(current_user) %>
-    <% end %>
-  </div>
-
-<%= yield %>
-
-</body>
+      <% if current_user %>
+	<p>
+	  <%= link_to "Members", :users %><br>
+	  <%= link_to "Projects", :projects %><br>
+	  <%= link_to "Laboratories", :labs %><br>
+	  <%= link_to "Inventory", :items %><br><br>
+	  <% if current_user.is_a? Admin %>
+            <b>Administrator Menu</b><br>
+            <%= link_to "Transactions", :transactions %><br>
+	    <%= link_to "Pending Transactions", \
+		"/transactions/status/pending" %>
+	  <% end %>
+	</p>
+      <% end %>
+    </div>
+    
+    <div id="head">
+      <b>labgrind</b> 
+      <% if current_user %>
+	- Logged in as <%= link_to current_user.username, \
+			   user_path(current_user) %>
+      <% end %>
+    </div>
+    
+    <%= yield %>
+    
+  </body>
 </html>

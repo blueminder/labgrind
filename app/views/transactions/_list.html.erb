@@ -1,42 +1,52 @@
-<table>
+<table id="transactions">
   <tr> <th> Type </th> <th> User </th> <th> Item </th>
     <th> Status </th> <th> Timestamp </th> </tr>
-<% @transactions.each do |t| %>
-<tr>
-  <td>
-    <% if t.class_type then %>
-    <%= t.class_type %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.user then %>
-    <%= t.user.username %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.item then %>
-    <%= t.item.name %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.status then %>
-    <%= t.status %>
-    <% end %>
-  </td>
-  <td>
-    <% if t.created_at? then %>
-    <%= t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
-    <% end %>
-  </td>
-  <% if t.pending? %>
-  <td>
-    <%= form_tag (url_for(:action => "approve", \
-                          :controller => "transactions")) do %>
-    <%= hidden_field_tag(:transaction_id, t.id) %>
-    <%= submit_tag "Approve" %>
-    <% end %>
-  </td>
+  <% @transactions.each do |t| %>
+    <tr>
+      <td>
+	<% if t.class_type then %>
+	  <%= t.class_type %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.user then %>
+	  <%= t.user.username %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.item then %>
+	  <%= t.item.name %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.status then %>
+	  <%= t.status %>
+	<% end %>
+      </td>
+      <td>
+	<% if t.created_at? then %>
+	  <%= t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
+	<% end %>
+      </td>
+      <% if t.pending? %>
+	<td>
+	  <%= form_tag (url_for(:action => "approve", \
+				:controller => "transactions")) do %>
+	    Due on:
+	    <%= date_select :transaction_date, :due_date, \
+		:start_year => Time.now.year, :end_year => Time.now.year + 1, \
+		:default => Time.now + 60 * 60 * 24 * 7 %>
+	    <%= hidden_field_tag(:transaction_id, t.id) %>
+	    <%= submit_tag "Approve" %>
+	  <% end %>
+	</td><td>
+	  <%= form_tag (url_for(:action => "reject", \
+				:controller => "transactions")) do %>
+	    <%= hidden_field_tag(:transaction_id, t.id) %>
+	    <%= submit_tag "Reject" %>
+	  <% end %>
+	</td>
+      <% end %>
+    </tr>
   <% end %>
-</tr>
-<% end %>
 </table>

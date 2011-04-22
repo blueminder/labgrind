@@ -1,7 +1,8 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+coc:
+  name: CoC 332
 
-one:
-  name: MyString
+moonbase:
+  name: Secret Moon Base
 
-two:
-  name: MyString
+nasa:
+  name: Nasa JPL

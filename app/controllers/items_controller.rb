@@ -1,7 +1,12 @@
+# The controller for manipulation of items.
+# This was largely auto-generated as a scaffold controller, which is the
+# reason for all that boilerplate you see below.
 class ItemsController < ApplicationController
   before_filter :require_user
+
   # GET /items
   # GET /items.xml
+  # Displays the index page listing all items.
   def index
     @items = Item.all
 
@@ -13,6 +18,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   # GET /items/1.xml
+  # Shows an individual item.
   def show
     @item = Item.find(params[:id])
 
@@ -24,6 +30,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   # GET /items/new.xml
+  # Creates a new item.
   def new
     @item = Item.new
 
@@ -34,18 +41,22 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1/edit
+  # Edits an existing item.
   def edit
     @item = Item.find(params[:id])
   end
 
   # POST /items
   # POST /items.xml
+  # Creates an item, given some parameters.
   def create
     if params[:lab_id] then
+      # Create an item, but then redirect back to the lab it belongs to.
       @lab = Lab.find(params[:lab_id])
       @item = @lab.items.create(params[:item])
       redirect_to lab_path(@lab)
     else
+      # This is just the generic create, called from the item view.
       @item = Item.new(params[:item])
 
       respond_to do |format|
@@ -62,6 +73,7 @@ class ItemsController < ApplicationController
 
   # PUT /items/1
   # PUT /items/1.xml
+  # Updates an existing item.
   def update
     @item = Item.find(params[:id])
 
@@ -78,6 +90,7 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   # DELETE /items/1.xml
+  # Deletes an item.
   def destroy
     @item = Item.find(params[:id])
     @item.destroy

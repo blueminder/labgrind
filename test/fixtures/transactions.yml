@@ -1,11 +1,54 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+full1:
+  user: enrique
+  item: rover
+  type: Checkout
+  status: Complete
+  created_at: <%= 20.days.ago %>
+  due_date: <%= 5.days.ago %>
 
-one:
-  user: 
-  item: 
-  type: MyString
+full2:
+  user: enrique
+  item: rover
+  type: Checkin
+  status: Complete
+  created_at: <%= 10.days.ago %>
 
-two:
-  user: 
-  item: 
-  type: MyString
+full3:
+  user: matt
+  item: rover
+  type: Checkout
+  status: Complete
+  created_at: <%= 8.days.ago %>
+  due_date: <%= 6.days.from_now %>
+
+full4:
+  user: matt
+  item: rover
+  type: Checkin
+  status: Complete
+  created_at: <%= 1.day.ago %>
+
+pending:
+  user: tim
+  item: lasercutter
+  type: Checkout
+  status: Pending
+  created_at: <%= 3.hours.ago %>
+  due_date: Eventually
+  id: 1
+
+checkedout:
+  user: joshua
+  item: accel
+  type: Checkout
+  status: Complete
+  created_at: <%= 10.days.ago %>
+  due_date: <%= 3.days.from_now %>
+
+overdue:
+  user: enrique
+  item: apollo
+  type: Checkout
+  status: Complete
+  created_at: <%= 25.days.ago %>
+  due_date: <%= 9.days.ago %>

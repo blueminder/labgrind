@@ -86,3 +86,16 @@ td {
 #content {
   padding-left: 15px;
 }
+
+table#transactions td:nth-child(6) {
+	border-right: none;
+}
+table#transactions td:nth-child(7) {
+	border-left: none;
+	padding-left: 0px;
+}
+
+.overdue {
+    color: #ff0000;
+    font-weight: bold;
+}

@@ -1,8 +1,5 @@
 require 'test_helper'
 
 class UserSessionTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  # I really have no idea; Enrique should do this
 end

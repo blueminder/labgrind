@@ -1,8 +1,5 @@
 require 'test_helper'
 
 class AnnotationTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+  # As dumb data holders, annotations don't really need any testing.
 end

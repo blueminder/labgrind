@@ -1,0 +1,31 @@
+lecture:
+  name: Lecture
+  description: Hear someone talk about stuff
+  start_time: 2011-04-16 12:00:00
+  end_time: 2011-04-16 13:00:00
+  exclusive: true
+  lab: coc
+
+workshop:
+  name: Work
+  description: Amazing Working Times
+  start_time: 2011-04-16 14:00:00
+  end_time: 2011-04-16 15:00:00
+  exclusive: false
+  lab: coc
+
+ohnoscheduling:
+  name: Event
+  description: An event we didn't really plan that well for
+  start_time: 2011-04-16 12:30:00
+  end_time: 2011-04-16 14:30:00
+  exclusive: false
+  lab: coc
+
+lecture2:
+  name: Other Lecture
+  description: This guy also wants to talk about stuff! How loquacious!
+  start_time: 2011-04-16 12:00:00
+  end_time: 2011-04-16 13:00:00
+  exclusive: true
+  lab: nasa

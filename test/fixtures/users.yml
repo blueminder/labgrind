@@ -1,15 +1,33 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+matt:
+  username: matt
+  email: matt@matt.com
+  crypted_password: ????
+  password_salt: ????
+  persistence_token: ????
+  type: Admin
+  skills: breathing, procrastination
 
-one:
-  username: MyString
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
+enrique:
+  username: enrique
+  email: enrique@enrique.com
+  crypted_password: ????
+  password_salt: ????
+  persistence_token: ????
+  type: Admin
+  skills: breathing, welding, procrastination
 
-two:
-  username: MyString
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
+joshua:
+  username: joshua
+  email: joshua@joshua.com
+  crypted_password: ????
+  password_salt: ????
+  persistence_token: ????
+  skills: breathing, welding
+
+tim:
+  username: tim
+  email: tim@tim.com
+  crypted_password: ????
+  password_salt: ????
+  persistence_token: ????
+  skills: breathing, welding

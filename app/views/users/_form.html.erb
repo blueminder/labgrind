@@ -1,16 +1,17 @@
 <%= form_for(@user.becomes(User)) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+      <h2><%= pluralize(@user.errors.count, "error") %>
+	prohibited this user from being saved:</h2>
+      
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+	<% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+	<% end %>
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username %>
@@ -31,9 +32,9 @@
     <% if !@skills.nil? %>
       <% @skills.each do |skill| %>
         <%= check_box_tag(
-            "user[skill_list][#{skill.id}]",
-            "1",
-            @user.becomes(User).skills.detect{|d| d==skill}) %>
+			  "user[skill_list][#{skill.id}]",
+			  "1",
+			  @user.becomes(User).skills.detect{|d| d==skill}) %>
         <%= "#{skill.name}" %><br />
       <% end %>
     <% end %>

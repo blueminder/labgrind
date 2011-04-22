@@ -21,6 +21,8 @@ Labgrind::Application.routes.draw do
 
   resources :user_sessions, :skills
 
+  resources :events
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'inventory' => 'items#index'
@@ -28,6 +30,7 @@ Labgrind::Application.routes.draw do
   match "/administrators/:id" => 'users#show'
   match "/transactions/status/:status" => "transactions#bystatus"
   match "/transactions/approve" => "transactions#approve"
+  match "/transactions/reject" => "transactions#reject"
 
   root :to => 'user_sessions#new', :as => :login
 

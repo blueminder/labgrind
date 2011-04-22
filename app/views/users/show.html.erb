@@ -5,80 +5,93 @@
 </h2>
 
 <div id="content">
-<p>
-  <b>Email</b><br>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>User Skills</b><br>
-  <% @user.skills.each do |skill| %>
-    <%= skill.name %> <br>
-  <% end %>
-</p>
-
-<p>
-  <b>Projects</b><br>
-  <% @user.projects.each do |project| %>
-    <%= project.name %> <br>
-  <% end %>
-</p>
-
-<% if @user == current_user %>
-<p>
-  <b>Checked Out Items</b>
-  <% if @user.items.size == 0 %>
-  <br>No items are currently checked out.
-  <% else %>
-  <table>
-    <tr> <th>Lab</th> <th>Item Name</th> <th></th> </tr>
-    <% @user.items.each do |item| %>
+  <p>
+    <b>Email</b><br>
+    <%= @user.email %>
+  </p>
+  
+  <p>
+    <b>User Skills</b><br>
+    <% @user.skills.each do |skill| %>
+      <%= skill.name %> <br>
+    <% end %>
+  </p>
+  
+  <p>
+    <b>Projects</b><br>
+    <% @user.projects.each do |project| %>
+      <%= link_to project.name, project %> <br>
+    <% end %>
+  </p>
+  
+  <% if @user == current_user or  current_user.is_a? Admin then %>
+    <p>
+      <b>Checked Out Items</b>
+      <% if @user.items.size == 0 %>
+	<br>No items are currently checked out.
+      <% else %>
+	<table>
+	  <tr> <th>Lab</th> <th>Item Name</th> <th>Due Date</th><th></th></tr>
+	  <% @user.items.each do |item| %>
+	    
+	    <tr>
+	      <td><%= Lab.find_by_id(item.lab_id).name %>
+	      <td>
+		<%= link_to(item.name, item) %>
+	      </td>
+	      <td>
+		<% if item.overdue? then %>
+		  <span class="overdue">
+		<% end %>
+		<%= item.due_date \
+		    and item.due_date.strftime("%a %b %e") %>
+		<% if item.overdue? then %>
+		  </span>
+		<% end %>
+	      </td>
+	      <% if current_user.is_a? Admin then %>
+		<td>
+		  <%# If the user's an Admin, it screws up the routing
+                      information here. We'll just cast them to a normal User
+		      temporarily %>
+		    <% user = @user.becomes(User) %> 
+		    <%= form_for([user, user.transactions.build]) do |f| %>
+		      <div class="action">
+			<%= f.hidden_field :item_id, {:value => item.id} %>
+			<%= f.hidden_field :class_type, {:value => "Checkin"} %>
+			<%= f.hidden_field :status, {:value => "Complete"} %>
+			<%= f.submit :value=> "Check in" %>
+		      </div>
+		    <% end %>
+		</td>
+	      <% end %>
+	    </tr>
+	  <% end %>
+	</table>
+      <% end %>
+    </p>
     
-    <tr>
-      <td><%= Lab.find_by_id(item.lab_id).name %>
-      <td>
-	<%= link_to(item.name, item) %>
-      </td> <td>
-	<%# If the user's an Admin, it screws up therouting information here
-	    We'll just cast them to a normal User temporarily %>
-	<% user = @user.becomes(User) %> 
-	<%= form_for([user, user.transactions.build]) do |f| %>
-	<div class="action">
-	  <%= f.hidden_field :item_id, {:value => item.id} %>
-	  <%= f.hidden_field :class_type, {:value => "Checkin"} %>
-	  <%= f.hidden_field :status, {:value => "Complete"} %>
-	  <%= f.hidden_field :due_date, {:value => "Eventually"} %>
-	  <%= f.submit :value=> "Check in" %>
-	</div>
+    <p>
+      <b>Past Transactions</b>
+      <table>
+	<tr> <th> Type </th> <th> Status </th> <th> Time </th> </tr>
+	<% @user.transactions.reverse.each do |t| %>
+	  <tr>
+	    <td>
+	      <%= t.class_type %>
+	    </td>
+	    <td>
+	      <%= t.status %>
+	    </td>
+	    <td>
+	      <%= t.created_at and \
+		  t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
+	    </td>
+	  </tr>
 	<% end %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
+      </table>
+    </p>
   <% end %>
-</p>
-
-<p>
-  <b>Past Transactions</b>
-  <table>
-    <tr> <th> Type </th> <th> Status </th> <th> Time </th> </tr>
-    <% @user.transactions.reverse.each do |t| %>
-    <tr>
-      <td>
-	<%= t.class_type %>
-      </td>
-      <td>
-	<%= t.status %>
-      </td>
-      <td>
-	<%= t.created_at and \
-	    t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-</p>
-<% end %>
 </div>
 
 <% if current_user.is_a? Admin %>

@@ -8,16 +8,17 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @skills.each do |skill| %>
-  <tr>
-    <td><%= skill.name %></td>
-    <td><%= skill.description %></td>
-    <td><%= link_to 'Show', skill %></td>
-    <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-    <td><%= link_to 'Destroy', skill, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  
+  <% @skills.each do |skill| %>
+    <tr>
+      <td><%= skill.name %></td>
+      <td><%= skill.description %></td>
+      <td><%= link_to 'Show', skill %></td>
+      <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
+      <td><%= link_to 'Destroy', skill, :confirm => 'Are you sure?', \
+	      :method => :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />
