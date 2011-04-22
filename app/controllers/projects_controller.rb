@@ -74,17 +74,44 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
+        @passed_users = params[:all_users] 
         @passed_members = params[:members]
         @passed_owners = params[:owners]
         
-        p_users_array = @project.users.map { |user| User.find(user.id).becomes(User).id.to_i }
+        p_users_array = @project.users.map { |user| [user.username, user.id] }
         
-        @project.users = @project.users - @project.owners
+        if !@passed_users.nil?
+          @passed_users.each do |user|
+            if @project.users.include?(User.find(user.to_i))
+              @project.users.delete(User.find(user.to_i))
+            end
+            
+            if @project.owners.include?(User.find(user.to_i))
+              @project.remove_owner(User.find(user.to_i))
+            end
+          end
+        end
         
         if !@passed_members.nil?
           @passed_members.each do |member|
-            if !@project.users.include?(member)
+            if !@project.users.include?(User.find(member.to_i))
               @project.users << User.find(member.to_i)
+            end
+            
+            if @project.owners.include?(User.find(member.to_i))
+              @project.remove_owner(User.find(member.to_i))
+            end
+          end
+        end
+        
+        if !@passed_owners.nil?
+          @passed_owners.each do |owner|
+            if !@project.users.include?(User.find(owner.to_i))
+              @project.users << User.find(owner.to_i)
+            end
+            
+            if !@project.owners.include?(User.find(owner.to_i))
+              @project.add_owner(User.find(owner.to_i))
             end
           end
         end
