@@ -1,7 +1,7 @@
 # The controller that handles user-related actions.
 class UsersController < ApplicationController
-  before_filter :require_user
-  
+  before_filter :require_user, :except => [:new, :create]
+
   def get_all_skills
     @skills = Skill.find(:all)
   end
