@@ -5,6 +5,7 @@
 # also be tied to a specific project.
 class Event < ActiveRecord::Base
   belongs_to :lab
+  belongs_to :project
 
   # Checks to see if, at any point, this event is running concurrently with
   # another event.
