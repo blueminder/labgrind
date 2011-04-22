@@ -66,7 +66,9 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to(:users, :notice => 'Registration successful.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
+	  elsif params[:make_admin]
+		  format.html { render 'user_sessions/init_config' }
+	  else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
