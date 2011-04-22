@@ -145,13 +145,15 @@ digraph Classes {
     User -> Transaction
     Item -> Transaction
 
+    Project -> ProjectAssignment
+    User -> ProjectAssignment
+
     edge [
          taillabel = "0..n"
          len = 1.0
          ]
     User -> Skill
-    User -> ProjectAssignment
-    ProjectAssignment -> Project
+    Project -> User
 
     edge [
          headlabel = "1"
