@@ -1,7 +1,7 @@
 # The controller that handles user-related actions.
 class UsersController < ApplicationController
-  before_filter :require_user
-  
+  before_filter :require_user, :except => [:new, :create]
+
   def get_all_skills
     @skills = Skill.find(:all)
   end
@@ -53,7 +53,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
+	if User.count == 0 and params[:make_admin]
+		# Make a new admin if and only if no other users
+		@user = Admin.new(params[:user])
+	else
+	    @user = User.new(params[:user])
+	end
     get_all_skills
     get_all_projects
 
