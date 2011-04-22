@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def owns? project
-    project.owners.include? self
+    project and project.owners.include? self
   end
 
   private

@@ -26,8 +26,6 @@ class Event < ActiveRecord::Base
       errors.add_to_base "Could not create event; " +
         "conflicts with #{conflicting_event.name} "+
         "(#{conflicting_event.start_time} to #{conflicting_event.end_time})"
-    else
-      super.validate
     end
   end
 end

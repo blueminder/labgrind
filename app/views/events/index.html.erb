@@ -21,7 +21,7 @@
 </table>
 
 <br />
-<%= if current_user.is_a? Admin then
+<%= if current_user.is_admin? then
       link_to "New Event", new_event_path
     end %>
 
