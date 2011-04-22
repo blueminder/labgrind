@@ -48,6 +48,7 @@ class UsersController < ApplicationController
     get_all_skills
     get_all_projects
     @user = User.find_by_username(params[:id])
+    return false unless require_specific_user(@user)
   end
 
   # POST /users
@@ -77,6 +78,9 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find_by_username(params[:id])
+
+    return false unless require_specific_user(@user)
+
     get_all_skills
     get_all_projects
 
@@ -95,6 +99,9 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     @user = User.find_by_username(params[:id])
+
+    return false unless require_specific_user(@user)
+
     @user.destroy
 
     respond_to do |format|

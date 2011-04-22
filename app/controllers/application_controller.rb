@@ -36,6 +36,15 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  def require_specific_user(user)
+    unless current_user == user or current_user.is_super_admin?
+      flash[:notice] = "Only #{user.name} can see their own details"
+      redirect_back_or_default(current_user)
+      return false
+    end
+    true
+  end
+
   # Similar to require_user, except that the user must also be an admin.
   def require_admin
     unless current_user.is_admin?
