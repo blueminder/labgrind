@@ -45,7 +45,7 @@ class TransactionsController < ApplicationController
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])
       
-      return false unless require_lab_admin(t.lab)
+      return false unless require_lab_admin(t.item.lab)
 
       if (params[:transaction_date]) then
         # Code here shamelessly stolen from the Internet
@@ -69,7 +69,7 @@ class TransactionsController < ApplicationController
     if params[:transaction_id] then
       t = Transaction.find(params[:transaction_id])
 
-      return false unless require_lab_admin(t.lab)
+      return false unless require_lab_admin(t.item.lab)
 
       t.status = "Cancelled"
       t.save
