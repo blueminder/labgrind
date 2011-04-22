@@ -96,6 +96,10 @@ digraph Classes {
 		label = "{Project|+name : string\l+description : string\l|}"
 	]
 
+	ProjectAssignment [
+		label = "{ProjectAssignment|+owner : boolean\l+created_at : datetime\l+updated_at : datetime\l|}"
+	]
+
         Skill [
                   label = "{Skill|+name : string\l+description : string\l+created_at : datetime\l|}"
           ]
@@ -146,7 +150,8 @@ digraph Classes {
          len = 1.0
          ]
     User -> Skill
-    User -> Project
+    User -> ProjectAssignment
+    ProjectAssignment -> Project
 
     edge [
          headlabel = "1"
