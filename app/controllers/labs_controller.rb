@@ -28,6 +28,8 @@ class LabsController < ApplicationController
   # GET /labs/new
   # GET /labs/new.xml
   def new
+    return false unless require_super_admin
+
     @lab = Lab.new
 
     respond_to do |format|
