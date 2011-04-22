@@ -7,6 +7,8 @@ digraph G {
 	Lab;
 	Skill;
 	User;
+	Event;
+	Project;
 
 	/* Relationships */
 	node [shape="diamond"];
@@ -18,39 +20,64 @@ digraph G {
 	User -> Transaction [headlabel="M"];
 	Item -> Transaction [headlabel="N"];
 
-	Annotation [label="Annotates"];
-	User -> Annotation [headlabel="M"];
-	Item -> Annotation [headlabel="N"];
-
 	Item_User [label="Uses"];
 	User -> Item_User [headlabel="N"];
 	Item_User -> Item [taillabel="1"];
 
+	Annotation [label="Annotates"];
+	User -> Annotation [headlabel="M"];
+	Item -> Annotation [headlabel="N"];
+
 	Item_Lab [label="Contains"];
 	Item -> Item_Lab [headlabel="N"];
+	Item -> Item_Lab;
 	Item_Lab -> Lab [taillabel="1"];
+
+	Event_Lab [label="Occurs in"]
+	Event -> Event_Lab;
+	Event -> Event_Lab [headlabel="N"];
+	Event_Lab -> Lab [taillabel="1"];
+
+	Event_Project [label="Occurs in"]
+	Event -> Event_Project [headlabel="N"];
+	Event_Project -> Project [taillabel="1"];
+
+	Project_User [label="Participates in"]
+	Project -> Project_User;
+	Project -> Project_User [headlabel="N"];
+	Project_User -> User [taillabel="M"];
 
 	/* Attributes */
 	node [shape="ellipse"];
 	Text -> Annotation;
-	Description -> Skill;
+	"Start Time" -> Event;
+	"End Time" -> Event;
+	"Exclusive" -> Event;
+	"Owner" -> Project_User;
 	Type -> Transaction;
 	Time -> Transaction;
 	Status -> Transaction;
 	"Due Date" -> Transaction;
-
 	Username -> User;
 	Email -> User;
 	Password -> User;
+
 	TypeN [label="Type"];
 	TypeN -> User;
 	TimeN [label="Time"];
-	Time -> Annotation;
+	TimeN -> Annotation;
 
 	node [label="Name"];
 	NameItem -> Item;
 	NameLab -> Lab;
 	NameSkill -> Skill;
+	NameProject -> Project;
+	NameEvent -> Event;
+
+	node [label="Description"];
+	SkillDescription -> Skill;
+	ProjectDescription -> Project;
+	EventDescription -> Event;
 
 	node [label=<<U>ID</U>>];
 	IDItem -> Item;

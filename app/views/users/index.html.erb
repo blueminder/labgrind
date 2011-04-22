@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Users</th>
-    <% if current_user.is_a? Admin %>
+    <% if current_user.is_admin? %>
       <th></th>
       <th></th>
     <% end %>
@@ -17,8 +17,10 @@
 	  <b>* </b>
 	<% end %>
       </td>
-      <% if current_user.is_a? Admin %>
+      <% if current_user.is_admin? %>
 	<td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <% end %>
+      <% if current_user.is_super_admin? %>
 	<td><%= link_to 'Destroy', user_path(user), \
 		:confirm => 'Are you sure?', :method => :delete %></td>
       <% end %>
@@ -28,6 +30,6 @@
 
 <br />
 
-<% if current_user.is_a? Admin %>
+<% if current_user.is_super_admin? %>
   <%= link_to 'New User', new_user_path %>
 <% end %>

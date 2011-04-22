@@ -4,7 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Lab</th>
-    <% if current_user.class_type == "Admin" %>
+    <% if current_user.is_admin? %>
       <th></th>
       <th></th>
     <% end %>
@@ -23,7 +23,7 @@
 	  This item is homeless :(
 	<% end %>
       </td>
-      <% if current_user.class_type == "Admin" %>
+      <% if current_user.administers_lab?(item.lab) %>
 	<td><%= link_to 'Edit', edit_item_path(item) %></td>
 	<td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
       <% end %>
@@ -32,6 +32,6 @@
 </table>
 
 <br />
-<% if current_user.class_type == "Admin" %>
+<% if current_user.is_admin? %>
   <%= link_to 'New Item', new_item_path %>
 <% end %>

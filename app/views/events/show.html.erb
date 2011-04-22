@@ -18,7 +18,7 @@
 <% end %>
 <p> <%= @event.description %> </p>
 
-<%= if current_user.is_a? Admin then
+<%= if current_user.is_admin? or current_user.owns? @event.project then
       link_to 'Edit', edit_event_path(@event)
     end %>
 <br />

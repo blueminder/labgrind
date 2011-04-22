@@ -4,4 +4,5 @@ class Lab < ActiveRecord::Base
   validates :name, :presence => true
   has_many :items
   has_many :events
+  has_many :users
 end

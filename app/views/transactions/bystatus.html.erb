@@ -1,4 +1,4 @@
-<% if current_user.is_a? Admin then %>
+<% if current_user.is_admin? then %>
   
   <h1> All <%= params[:status] %> transactions </h1>
   

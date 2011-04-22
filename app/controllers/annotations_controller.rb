@@ -1,5 +1,7 @@
 # The controller for manipulation of annotations.
 class AnnotationsController < ApplicationController
+  before_filter :require_user
+
   # Creates a new annotation for the given item.
   # After creation, this will redirect to the item page.
   def create

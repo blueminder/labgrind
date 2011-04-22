@@ -16,10 +16,15 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :lab %><br />
-    <%= f.collection_select(:lab_id, Lab.all, :id, :name) %>
-  </div>
+  <% if current_user.is_super_admin? then %>
+    <div class="field">
+      <%= f.label :lab %><br />
+      <%= f.collection_select(:lab_id, Lab.all, :id, :name) %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :lab_id, {:value => current_user.lab_id} %>
+    <strong>In <%= current_user.lab.name %></strong>
+  <% end %>
   <div class="field">
     <%= f.label :start %>
     <%= f.datetime_select :start_time %>

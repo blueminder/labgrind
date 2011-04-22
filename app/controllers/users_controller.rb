@@ -1,7 +1,7 @@
 # The controller that handles user-related actions.
 class UsersController < ApplicationController
-  before_filter :require_user
-  
+  before_filter :require_user, :except => [:new, :create]
+
   def get_all_skills
     @skills = Skill.find(:all)
   end
@@ -48,12 +48,18 @@ class UsersController < ApplicationController
     get_all_skills
     get_all_projects
     @user = User.find_by_username(params[:id])
+    return false unless require_specific_user(@user)
   end
 
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
+	if User.count == 0 and params[:make_admin]
+		# Make a new admin if and only if no other users
+		@user = Admin.new(params[:user])
+	else
+	    @user = User.new(params[:user])
+	end
     get_all_skills
     get_all_projects
 
@@ -61,7 +67,10 @@ class UsersController < ApplicationController
       if @user.save
         format.html { redirect_to(:users, :notice => 'Registration successful.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
+	  elsif params[:make_admin]
+		  # Admins will get redirected to the labs_url to make more stuff
+		  format.html { render labs_url }
+	  else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -72,6 +81,9 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find_by_username(params[:id])
+
+    return false unless require_specific_user(@user)
+
     get_all_skills
     get_all_projects
 
@@ -90,6 +102,9 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   def destroy
     @user = User.find_by_username(params[:id])
+
+    return false unless require_specific_user(@user)
+
     @user.destroy
 
     respond_to do |format|

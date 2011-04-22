@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  reference: 
-  reference: 
-  integer: 
+enriqueOwnsMoonBase:
+  owner: 1
+  user: enrique
+  project: moon
 
-two:
-  reference: 
-  reference: 
-  integer: 
+joshuaWorksOnItToo:
+  owner: 0
+  user: joshua
+  project: moon

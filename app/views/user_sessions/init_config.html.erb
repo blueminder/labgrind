@@ -5,7 +5,7 @@
 	 administrator. Please enter the fields below.</p>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user_session.errors.count, "error") %>
+      <h2><%= pluralize(@user.errors.count, "error") %>
 	prohibited initial configuration:</h2>
       
       <ul>
@@ -32,6 +32,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </div>
+  <%= hidden_field_tag(:make_admin, "1") %>
   <div class="actions">
     <%= f.submit "Create" %>
   </div>

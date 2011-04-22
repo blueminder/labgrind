@@ -31,10 +31,20 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    if @event.project
+      return false unless require_project_owner(@event.project)
+    else
+      return false unless require_lab_admin(@event.lab)
+    end
   end
 
   def create
     @event = Event.new(params[:event])
+    if @event.project then
+      return false unless require_project_owner(@event.project)
+    else
+      return false unless require_lab_admin(@event.lab)
+    end
 
     respond_to do |format|
       if @event.save then
@@ -52,6 +62,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
+    if @event.project then
+      return false unless require_project_owner(@event.project)
+    else
+      return false unless require_lab_admin(@event.lab)
+    end
+
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to(@event, :notice => 'Event updated.') }
@@ -66,6 +82,13 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
+
+    if @event.project then
+      return false unless require_project_owner(@event.project)
+    else
+      return false unless require_lab_admin(@event.lab)
+    end
+
     @event.destroy
 
     respond_to do |format|
