@@ -37,9 +37,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_specific_user(user)
-    unless current_user == user or current_user.is_super_admin?
-      flash[:notice] = "Only #{user.name} can see their own details"
-      redirect_back_or_default(current_user)
+    unless current_user == user or current_user.is_admin?
+      flash[:notice] = "Only #{user.username} can see their own details"
+      redirect_back_or_default(current_user.becomes User)
       return false
     end
     true
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     unless current_user.is_admin?
       flash[:notice] = "You must be some sort of administrator to access this page"
-      redirect_back_or_default(current_user)
+      redirect_back_or_default(current_user.becomes User)
       return false
     end
     true
@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   def require_super_admin
     unless current_user.is_super_admin?
       flash[:notice] = "You must be a super-administrator to access this page"
-      redirect_back_or_default(current_user)
+      redirect_back_or_default(current_user.becomes User)
       return false
     end
     true
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     unless current_user.administers_lab?(lab)
       flash[:notice] =
         "You must be an administrator of #{lab.name} to access this page"
-      redirect_back_or_default(current_user)
+      redirect_back_or_default(current_user.becomes User)
       return false
     end
     true
@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     unless current_user.owns? project or current_user.is_super_admin?
       flash[:notice] = 
         "Only owners of this project can access that."
-      redirect_back_or_default(current_user)
+      redirect_back_or_default(current_user.becomes User)
       return false
     end
     true
@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = "You must be logged out to access this page"
-      redirect_to current_user
+      redirect_to(current_user.becomes User)
       return false
     end
     true

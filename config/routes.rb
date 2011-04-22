@@ -38,6 +38,9 @@ Labgrind::Application.routes.draw do
     map.namespace :admin do |admin|
       admin.resources :users
     end
+    map.namespace :lab_admin do |admin|
+      admin.resources :users
+    end
   end
 
 end

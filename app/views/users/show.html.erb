@@ -24,7 +24,7 @@
     <% end %>
   </p>
   
-  <% if @user == current_user or  current_user.is_a? Admin then %>
+  <% if @user == current_user or  current_user.is_admin? then %>
     <p>
       <b>Checked Out Items</b>
       <% if @user.items.size == 0 %>
@@ -32,7 +32,10 @@
       <% else %>
 	<table>
 	  <tr> <th>Lab</th> <th>Item Name</th> <th>Due Date</th><th></th></tr>
-	  <% @user.items.each do |item| %>
+	  <% @user.items.select do |i|
+	       current_user == @user or
+		 current_user.administrates_lab?(i.lab)
+	     end.each do |item| %>
 	    
 	    <tr>
 	      <td><%= Lab.find_by_id(item.lab_id).name %>
@@ -49,7 +52,7 @@
 		  </span>
 		<% end %>
 	      </td>
-	      <% if current_user.is_a? Admin then %>
+	      <% if current_user.is_admin? then %>
 		<td>
 		  <%# If the user's an Admin, it screws up the routing
                       information here. We'll just cast them to a normal User
@@ -74,27 +77,34 @@
     <p>
       <b>Past Transactions</b>
       <table>
-	<tr> <th> Type </th> <th> Status </th> <th> Time </th> </tr>
+	<tr> <th> Type </th> <th> Item </th>
+	  <th> Status </th> <th> Time </th> </tr>
 	<% @user.transactions.reverse.each do |t| %>
-	  <tr>
-	    <td>
-	      <%= t.class_type %>
-	    </td>
-	    <td>
-	      <%= t.status %>
-	    </td>
-	    <td>
-	      <%= t.created_at and \
-		  t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
-	    </td>
-	  </tr>
+	  <% if current_user == @user or
+		 current_user.administers_lab?(t.item.lab) %>
+	    <tr>
+	      <td>
+		<%= t.class_type %>
+	      </td>
+	      <td>
+		<%= link_to t.item.name, t.item %>
+	      </td>
+	      <td>
+		<%= t.status %>
+	      </td>
+	      <td>
+		<%= t.created_at and \
+		    t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
+	      </td>
+	    </tr>
+	  <% end %>
 	<% end %>
       </table>
     </p>
   <% end %>
 </div>
 
-<% if current_user.is_a? Admin %>
+<% if current_user.is_admin? %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>
 
