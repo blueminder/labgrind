@@ -29,19 +29,43 @@ class ApplicationController < ActionController::Base
   # views to restrict certain pages. 
   def require_user
     unless current_user
-      store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
+      redirect_back_or_default(new_user_session_url)
       return false
     end
   end
 
   # Similar to require_user, except that the user must also be an admin.
   def require_admin
-    unless current_user.class == Admin
-      store_location
-      flash[:notice] = "You must be an administrator to access this page"
-      redirect_to labs_url
+    unless current_user.is_admin?
+      flash[:notice] = "You must be some sort of administrator to access this page"
+      redirect_back_or_default(current_user)
+      return false
+    end
+  end
+
+  def require_super_admin
+    unless current_user.is_super_admin?
+      flash[:notice] = "You must be a super-administrator to access this page"
+      redirect_back_or_default(current_user)
+      return false
+    end
+  end
+
+  def require_lab_admin(lab)
+    unless current_user.administers_lab?(lab)
+      flash[:notice] =
+        "You must be an administrator of #{lab.name} to access this page"
+      redirect_back_or_default(current_user)
+      return false
+    end
+  end
+
+  def require_project_owner(project)
+    unless current_user.owns? project or current_user.is_super_admin?
+      flash[:notice] = 
+        "Only owners of this project can access that."
+      redirect_back_or_default(current_user)
       return false
     end
   end
@@ -53,7 +77,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = "You must be logged out to access this page"
-      redirect_to account_url
+      redirect_to current_user
       return false
     end
   end

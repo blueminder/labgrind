@@ -25,7 +25,7 @@
 	  <%= link_to "Projects", :projects %><br>
 	  <%= link_to "Laboratories", :labs %><br>
 	  <%= link_to "Inventory", :items %><br><br>
-	  <% if current_user.is_a? Admin %>
+	  <% if current_user.is_admin? %>
             <b>Administrator Menu</b><br>
             <%= link_to "Transactions", :transactions %><br>
 	    <%= link_to "Pending Transactions", \

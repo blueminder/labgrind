@@ -6,6 +6,10 @@ class LabAdmin < User
     true
   end
 
+  def is_super_admin?
+    false
+  end
+
   def administers_lab? lab
     self.lab == lab
   end

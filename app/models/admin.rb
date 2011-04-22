@@ -4,6 +4,10 @@ class Admin < User
     true
   end
 
+  def is_super_admin?
+    true
+  end
+
   def administers_lab? lab
     true
   end

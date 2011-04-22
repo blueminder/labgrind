@@ -45,9 +45,17 @@ class User < ActiveRecord::Base
     false
   end
 
+  def is_super_admin?
+    false
+  end
+
   # Checks whether or not thus user can administer a certain lab.
   def administers_lab? lab
     false
+  end
+
+  def owns? project
+    project.owners.include? self
   end
 
   private
