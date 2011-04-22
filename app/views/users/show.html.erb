@@ -34,7 +34,7 @@
 	  <tr> <th>Lab</th> <th>Item Name</th> <th>Due Date</th><th></th></tr>
 	  <% @user.items.select do |i|
 	       current_user == @user or
-		 current_user.administrates_lab?(i.lab)
+		 current_user.administers_lab?(i.lab)
 	     end.each do |item| %>
 	    
 	    <tr>

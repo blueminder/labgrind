@@ -24,7 +24,8 @@
 	  <%= link_to "Members", :users %><br>
 	  <%= link_to "Projects", :projects %><br>
 	  <%= link_to "Laboratories", :labs %><br>
-	  <%= link_to "Inventory", :items %><br><br>
+	  <%= link_to "Inventory", :items %><br>
+	  <%= link_to "Events", :events %><br /><br />
 	  <% if current_user.is_admin? %>
             <b>Administrator Menu</b><br>
             <%= link_to "Transactions", :transactions %><br>
