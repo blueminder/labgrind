@@ -40,6 +40,16 @@ class User < ActiveRecord::Base
     return self[:type]
   end
 
+  # Checks whether or not this user is any kind of admin.
+  def is_admin?
+    false
+  end
+
+  # Checks whether or not thus user can administer a certain lab.
+  def administers_lab? lab
+    false
+  end
+
   private
 
   # Update which skills this user has.
