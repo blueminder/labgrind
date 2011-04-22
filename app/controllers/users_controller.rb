@@ -2,10 +2,12 @@
 class UsersController < ApplicationController
   before_filter :require_user, :except => [:new, :create]
 
+  # Returns all skills
   def get_all_skills
     @skills = Skill.find(:all)
   end
   
+  # Returns all projects
   def get_all_projects
     @projects = Project.find(:all)
   end

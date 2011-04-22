@@ -2,6 +2,7 @@
 class EventsController < ApplicationController
   before_filter :require_user
 
+  # Gets a list of all events
   def index
     @events = Event.all
 
@@ -11,6 +12,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Shows a single event
   def show
     @event = Event.find(params[:id])
 
@@ -20,6 +22,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Makes a new event
   def new
     @event = Event.new
 
@@ -29,6 +32,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Displays the edit page
   def edit
     @event = Event.find(params[:id])
     if @event.project
@@ -38,6 +42,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Commits the changes to a new event
   def create
     @event = Event.new(params[:event])
     if @event.project then
@@ -59,6 +64,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Commits the change to an updated event
   def update
     @event = Event.find(params[:id])
 
@@ -80,6 +86,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Deletes the event.
   def destroy
     @event = Event.find(params[:id])
 

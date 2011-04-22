@@ -20,6 +20,7 @@ class Event < ActiveRecord::Base
     lab == other.lab and overlaps? other and (exclusive or other.exclusive)
   end
 
+  # Validates that an event would not cause a conflict with any other event.
   def validate
     conflicting_event = Event.all.find {|e| conflicts_with? e}
     if conflicting_event then

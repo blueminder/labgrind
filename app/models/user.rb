@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
     false
   end
 
+  # Checks whether or not this user is a site administrator.
   def is_super_admin?
     false
   end
@@ -54,6 +55,7 @@ class User < ActiveRecord::Base
     false
   end
 
+  # Checks whether or not the user owns the given project.
   def owns? project
     project and project.owners.include? self
   end
