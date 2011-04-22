@@ -91,6 +91,10 @@ digraph Classes {
         Lab [
                 label = "{Lab|+name : string\l+created_at : datetime\l|}"
         ]
+
+	LabAdmin [
+		 label = "{LabAdmin||}"
+	]
     
         Project [
 		label = "{Project|+name : string\l+description : string\l|}"
@@ -109,7 +113,7 @@ digraph Classes {
                 ]
     
         User [
-                 label = "{User|+username : string\l+email : string\l+crypted_password : string\l+password_salt : string\l+persistence_token : string\l+created_at : datetime\l|-update_skills() : void\l}"
+                 label = "{User|+username : string\l+email : string\l+crypted_password : string\l+password_salt : string\l+persistence_token : string\l+created_at : datetime\l|-update_skills() : void\l+is_admin?() : boolean\l+administers_lab?(Lab) : boolean\l}"
          ]
     
         UserSession [
@@ -119,6 +123,7 @@ digraph Classes {
     Transaction -> Checkout [dir = back]
     Transaction -> Checkin [dir = back]
     User -> Admin [dir = back]
+    User -> LabAdmin [dir = back]
 
     edge [
          arrowhead = "none"
@@ -127,6 +132,7 @@ digraph Classes {
          taillabel = "1"
          ]
     Lab -> Item
+    Lab -> LabAdmin
 
     Lab -> Event
     Project -> Event
