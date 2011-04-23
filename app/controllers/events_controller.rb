@@ -31,6 +31,8 @@ class EventsController < ApplicationController
 
   # Makes a new event
   def new
+    return false unless require_admin
+
     @event = Event.new
 
     respond_to do |format|
