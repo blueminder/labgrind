@@ -44,8 +44,18 @@
     <% @project.project_updates.reverse.each do |update| %>
     
     <% if update.user_id then %>
-    <div style="padding-left: 20px; padding-bottom: 40px;">
-      <h3><%= update.title %></h3><i>by 
+    <div style="padding-left: 20px; padding-bottom: 40px;" class="project_entry">
+      
+      <div class="entry_options">
+      <%= link_to image_tag("/images/delete.png"), project_project_update_path(@project,update), :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+    
+      <b>
+      <div class="edit_title" id="<%= update.id %>" name="title"><%= update.title %></div>
+      </b>
+      
+      
+      <i>by 
       
       <% if update.user_id then %>
 	    <b> <%= link_to update.user.username, user_path(update.user) %> </b> wrote:
@@ -58,7 +68,7 @@
 	    <% end %>
 	    
 	    </i><br><br>
-      <div style="padding-left: 20px;"><%= update.content %></div>
+	    <div style="padding-left: 20px;" class="edit_content" id="<%= update.id %>" name="content"><%= update.content %></div>
     </div>
     <% end %>
     <% end %>

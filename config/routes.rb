@@ -1,7 +1,9 @@
 Labgrind::Application.routes.draw do
 
   resources :projects do
-    resources :project_updates
+    resources :project_updates do
+      
+    end
   end
 
   resources :users do
@@ -33,6 +35,11 @@ Labgrind::Application.routes.draw do
   match "/transactions/status/:status" => "transactions#bystatus"
   match "/transactions/approve" => "transactions#approve"
   match "/transactions/reject" => "transactions#reject"
+  match "/projects/update_entry_title" => "projects#update_entry_title"
+  match "/projects/update_entry_content" => "projects#update_entry_content"
+  match "/projects/delete_entry" => "projects#delete_entry"
+  match "/projects/:project_id/project_updates/:id" => 'project_updates#delete'
+  
 
   root :to => 'user_sessions#new', :as => :login
 

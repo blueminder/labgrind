@@ -55,6 +55,12 @@ div.field, div.actions {
   list-style: square;
 }
 
+#project_info {
+  float:right;
+  padding: 15px;
+  background: #FDFCDC;
+}
+
 table.red {
     border-spacing: 0px;
     border-collapse: collapse;
@@ -135,9 +141,15 @@ table#transactions td:nth-child(7) {
     text-align: center;
     padding: 6px;
     border: 1px solid #000;
-
-#project_info {
-  float:right;
-  padding: 15px;
-  background: #FDFCDC;
 }
+
+.project_entry {
+  padding: 10px;
+}
+
+.entry_options {
+    display: none;
+    float: right;
+}
+
+

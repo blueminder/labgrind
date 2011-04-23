@@ -9,4 +9,23 @@ class ProjectUpdatesController < ApplicationController
     redirect_to project_path(@project)
   end
   
+  def update
+    @project = Project.find(params[:project_id])
+    @update = @project.project_updates.find(params[:id])
+    @update.content = params[:value]
+    @update.save
+    render :text => params[:value]
+  end
+  
+  # DELETE /projects/1/project_updates/1
+  # DELETE /projects/1/project_updates/1.xml
+  def destroy
+    @project = Project.find(params[:project_id])
+    @update = @project.project_updates.find( params[:id] )
+    @update.destroy
+    flash[:notice] = 'Entry removed.'
+    redirect_to(@project)
+  end
+
+  
 end

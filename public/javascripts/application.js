@@ -1,6 +1,14 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function() {
+    
+  // Always send the authenticity_token with ajax
+  $(document).ajaxSend(function(event, request, settings) {
+    if ( settings.type == 'post' ) {
+      settings.data = (settings.data ? settings.data + "&" : "") + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
+    }
+  });
+    
  // hides the slickbox as soon as the DOM is ready
   $('#slickbox').hide();
  // shows the slickbox on clicking the noted link  
@@ -19,6 +27,67 @@ $(document).ready(function() {
     $('#slickbox').toggle(400);
     return false;
   });
+  
+  $(".project_entry").each( function() {   
+    
+    $(".edit_title").each( function() {    
+        $(this).editable('update_entry_title', {
+              type    :   'textarea',
+              cancel  :   'Cancel',
+              submit  :   'Save Title',
+              indicator   :   'Saving...',
+              tooltip :   'Click to Edit.',
+              rows        :       0,
+              method      :       "put",
+              submitdata  :   {id: $(this).attr('id'), name:$(this).attr('name') }
+          });
+    });
+      
+    $(".edit_content").each( function() {    
+        $(this).editable('update_entry_content', {
+              type    :   'textarea',
+              cancel  :   'Cancel',
+              submit  :   'Save Entry Content',
+              indicator   :   'Saving...',
+              tooltip :   'Click to Edit.',
+              rows        :       5,
+              method      :       "put",
+              submitdata  :   {id: $(this).attr('id'), name:$(this).attr('name') }
+          });
+    });
+    
+    $(".edit_title").mouseover(function(event) {
+      $(this).css('background','#ffffff'); 
+    });
+    
+    $(".edit_title").mouseout(function(event) {
+      $(this).css('background',''); 
+    });
+    
+    $(".edit_content").mouseover(function(event) {
+      $(this).css('background','#ffffff'); 
+    });
+    
+    $(".edit_content").mouseout(function(event) {
+      $(this).css('background',''); 
+    });
+  });
+  
+  $(".project_entry").mouseover(function(event) {
+    $(this).css('background','#ffffcc'); 
+    $('.entry_options').show();
+  });
+  
+  $(".project_entry").mouseout(function(event) {
+    $(this).css('background',''); 
+    $('.entry_options').hide();
+  });
+  
+  $('.delete_entry').click(function() {
+    $('.delete_entry').post
+    return false;
+  });
+
 });
 
 

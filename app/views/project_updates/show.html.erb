@@ -7,7 +7,9 @@
 
 <p>
   <b>Content:</b>
-  <%= @project_update.content %>
+  <div class="edit_textfield" id="<%= @project_update.id %>" name="content">
+    <%= @project_update.content %>
+  </div>
 </p>
 
 

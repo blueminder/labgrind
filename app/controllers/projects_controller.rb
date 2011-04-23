@@ -65,7 +65,34 @@ class ProjectsController < ApplicationController
       end
     end
   end
+  
+  def update_entry_title
+    @entry = ProjectUpdate.find(params[:id])
+    @entry.title = params[:value]
+    @entry.save
+    render :text => params[:value]
+  end
 
+  def update_entry_content
+    @entry = ProjectUpdate.find(params[:id])
+    @entry.content = params[:value]
+    @entry.save
+    render :text => params[:value]
+  end
+  
+  def delete_entry
+    @entry = ProjectUpdate.find(params[:id])
+
+    return false unless require_project_owner(@project)
+
+    @entry.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(project_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
