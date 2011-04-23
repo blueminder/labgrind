@@ -65,7 +65,7 @@
 <br />
 <br />
 
-<% if current_user.owns? @project then %>
+<% if current_user.owns? @project or current_user.is_super_admin? then %>
   <%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
 <%= link_to 'Back', projects_path %>
