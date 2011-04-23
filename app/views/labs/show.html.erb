@@ -29,22 +29,9 @@
 <% end %>
 
 <strong> Events in this lab </strong>
-<table class="red">
-  <tr>
-    <th> Name </th>
-    <th> Starts </th>
-    <th> Ends </th>
-    <th> Reserved? </th>
-  </tr>
-  <% @lab.events.each do |event| %>
-    <tr>
-      <td> <%= link_to event.name, event %> </td>
-      <td> <%= event.start_time %> </td>
-      <td> <%= event.end_time %> </td>
-      <td> <%= event.exclusive ? "YES" : "NO" %> </td>
-    </tr>
-  <% end %>
-</table>
+<div style="width:70%">
+<%= raw(event_calendar) %>
+</div>
 
 <% if current_user.administers_lab?(@lab) %>
   <%= link_to 'Edit', edit_lab_path(@lab) %> |

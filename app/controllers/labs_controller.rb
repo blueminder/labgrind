@@ -19,6 +19,16 @@ class LabsController < ApplicationController
   def show
     @lab = Lab.find(params[:id])
 
+    @events = Event.where(:lab_id => @lab.id)
+
+    @month = (params[:month] || Time.zone.now.month).to_i
+    @year = (params[:year] || Time.zone.now.year).to_i
+
+    @shown_month = Date.civil(@year, @month)
+    start_d, end_d = Event.get_start_and_end_dates(@shown_month)
+
+    @event_strips = Event.create_event_strips(start_d, end_d, @events)
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @lab }
