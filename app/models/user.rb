@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def member_of? project
-    project and project.members.include? self
+    project and project.users.include? self
   end
 
   private
