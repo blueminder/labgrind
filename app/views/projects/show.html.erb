@@ -62,5 +62,10 @@
 <% end %>
 </div>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<br />
+<br />
+
+<% if current_user.owns? @project then %>
+  <%= link_to 'Edit', edit_project_path(@project) %> |
+<% end %>
 <%= link_to 'Back', projects_path %>
