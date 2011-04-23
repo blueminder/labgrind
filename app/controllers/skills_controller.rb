@@ -2,7 +2,7 @@
 # This is Enrique's domain, but it looks like this is pretty much just more
 # Rails boilerplate.
 class SkillsController < ApplicationController
-  before_filter :require_super_admin
+  before_filter :require_admin
   # GET /skills
   # GET /skills.xml
   def index
