@@ -60,7 +60,7 @@
   <% if @item.transactions.length <= 1 then %>
   <em> No transactions yet </em>
   <% else %>
-  <table>
+  <table class="red">
     <tr> <th> Type </th> <th> User </th>
       <th> Status </th> <th> Timestamp </th> </tr>
     <% @item.transactions.each do |t| %>
@@ -97,7 +97,7 @@
 <% unless @item.annotations.length <= 1 then %>
 <p>
   <b>Notes and Annotations:</b> <br />
-  <table>
+  <table class="red">
     <tr> <th> User </th> <th> Timestamp </th> <th> Note </th> </tr>
     <% @item.annotations.reverse.each do |annotation| %>
     <tr>

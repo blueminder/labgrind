@@ -30,7 +30,7 @@
       <% if @user.items.size == 0 %>
 	<br>No items are currently checked out.
       <% else %>
-	<table>
+	<table class="red">
 	  <tr> <th>Lab</th> <th>Item Name</th> <th>Due Date</th><th></th></tr>
 	  <% @user.items.select do |i|
 	       current_user == @user or
@@ -76,7 +76,7 @@
     
     <p>
       <b>Past Transactions</b>
-      <table>
+      <table class="red">
 	<tr> <th> Type </th> <th> Item </th>
 	  <th> Status </th> <th> Time </th> </tr>
 	<% @user.transactions.reverse.each do |t| %>

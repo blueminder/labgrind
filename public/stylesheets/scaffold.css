@@ -55,11 +55,11 @@ div.field, div.actions {
   list-style: square;
 }
 
-table{
+table.red {
     border-spacing: 0px;
     border-collapse: collapse;
 }
-th {
+table.red th {
     text-align: center;
     font-weight: bold;
     padding: 2px;
@@ -67,10 +67,10 @@ th {
     background: #8B2500;
     color: #FFFFFF;
 }
-tr {
+table.red tr {
     background: #FDFCDC;
 }
-td {
+table.red td {
     text-align: center;
     padding: 6px;
     border: 1px solid #000;
@@ -117,4 +117,22 @@ table#transactions td:nth-child(7) {
 
 .ui-datepicker-title {
     text-align: center;
+}
+
+.ui-datepicker th {
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
+    border: 1px solid #000;
+    background: #8B2500;
+    color: #FFFFFF;
+}
+.ui-datepicker tr {
+    background: #FDFCDC;
+}
+
+.ui-datepicker td {
+    text-align: center;
+    padding: 6px;
+    border: 1px solid #000;
 }
