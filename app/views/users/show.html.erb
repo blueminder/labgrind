@@ -12,15 +12,26 @@
   
   <p>
     <b>User Skills</b><br>
-    <% @user.skills.each do |skill| %>
-      <%= skill.name %> <br>
+    <% if @user.skills.empty? %>
+      None :(
+    <% else %>
+      <% @user.skills.each do |skill| %>
+	<%= skill.name %> <br>
+      <% end %>
     <% end %>
   </p>
   
   <p>
     <b>Projects</b><br>
-    <% @user.projects.each do |project| %>
-      <%= link_to project.name, project %> <br>
+    <% if @user.projects.empty? %>
+      No projects.
+      <% if current_user == @user %>
+	<%= link_to "Maybe you'd like to start one?", new_project_path %>
+      <% end %>
+    <% else %>
+      <% @user.projects.each do |project| %>
+	<%= link_to project.name, project %> <br>
+      <% end %>
     <% end %>
   </p>
   
@@ -43,14 +54,10 @@
 		<%= link_to(item.name, item) %>
 	      </td>
 	      <td>
-		<% if item.overdue? then %>
-		  <span class="overdue">
-		<% end %>
-		<%= item.due_date \
-		    and item.due_date.strftime("%a %b %e") %>
-		<% if item.overdue? then %>
-		  </span>
-		<% end %>
+		<span class="<%= item.overdue? ? "overdue" : "" %>">
+		  <%= item.due_date \
+		      and item.due_date.strftime("%a %b %e") %>
+		</span>
 	      </td>
 	      <% if current_user.is_admin? then %>
 		<td>
@@ -74,33 +81,35 @@
       <% end %>
     </p>
     
-    <p>
-      <b>Past Transactions</b>
-      <table class="red">
-	<tr> <th> Type </th> <th> Item </th>
-	  <th> Status </th> <th> Time </th> </tr>
-	<% @user.transactions.reverse.each do |t| %>
-	  <% if current_user == @user or
-		 current_user.administers_lab?(t.item.lab) %>
-	    <tr>
-	      <td>
-		<%= t.class_type %>
-	      </td>
-	      <td>
-		<%= link_to t.item.name, t.item %>
-	      </td>
-	      <td>
-		<%= t.status %>
-	      </td>
-	      <td>
-		<%= t.created_at and \
-		    t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
-	      </td>
-	    </tr>
+    <% unless @user.transactions.empty? %>
+      <p>
+	<b>Past Transactions</b>
+	<table class="red">
+	  <tr> <th> Type </th> <th> Item </th>
+	    <th> Status </th> <th> Time </th> </tr>
+	  <% @user.transactions.reverse.each do |t| %>
+	    <% if current_user == @user or
+		   current_user.administers_lab?(t.item.lab) %>
+	      <tr>
+		<td>
+		  <%= t.class_type %>
+		</td>
+		<td>
+		  <%= link_to t.item.name, t.item %>
+		</td>
+		<td>
+		  <%= t.status %>
+		</td>
+		<td>
+		  <%= t.created_at and \
+		      t.created_at.getlocal.strftime("%a %b %e, %I:%M:%S %p") %>
+		</td>
+	      </tr>
+	    <% end %>
 	  <% end %>
-	<% end %>
-      </table>
-    </p>
+	</table>
+      </p>
+    <% end %>
   <% end %>
 </div>
 
