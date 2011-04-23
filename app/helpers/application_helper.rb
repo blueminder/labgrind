@@ -1,5 +1,6 @@
-# oh god what is this
+# Helper for the application as a hole
 module ApplicationHelper
+  # Geta a link to a calendar for the month of a day
   def month_link(month_date)
     link_to(I18n.localize(month_date, :format => "%B"),
             {:month => month_date.month, :year => month_date.year})
@@ -17,7 +18,8 @@ module ApplicationHelper
       :height => 300
     }
   end
-  
+
+  # Gets a link to the calendar for an event
   def event_calendar
     calendar event_calendar_options do |args|
       event = args[:event]

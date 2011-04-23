@@ -97,6 +97,8 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  # Prohibits access to this page unless the current user is a project member
+  # or a site administrator.
   def require_project_member(project)
     unless current_user.belongs_to? project or current_user.is_super_admin?
       flash[:notice] =

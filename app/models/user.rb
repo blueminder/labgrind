@@ -61,6 +61,7 @@ class User < ActiveRecord::Base
     project and project.owners.include? self
   end
 
+  # Checks whether or not the project is a member of the given project.
   def member_of? project
     project and project.users.include? self
   end

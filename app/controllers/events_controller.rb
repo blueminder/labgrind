@@ -51,6 +51,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # Munges the event input parameters to be acceptable to the Event object.
   def fiddle_around_with_the_params params
     date = params.delete "date"
     parts = date.split "-"
