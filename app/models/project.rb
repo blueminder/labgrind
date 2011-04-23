@@ -2,6 +2,7 @@
 class Project < ActiveRecord::Base
   has_many :project_assignments
   has_many :users, :through => :project_assignments
+  has_many :project_updates
   has_many :events
   
   # Makes the user of a project an owner

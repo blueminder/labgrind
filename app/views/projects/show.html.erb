@@ -1,28 +1,66 @@
 <p id="notice"><%= notice %></p>
+<div id="project_info">
+
+<a href="#" id="slick-toggle">Make a Project Update</a>
+<div id="slickbox">
+  <%= form_for([@project, @project.project_updates.build]) do |f| %>
+  <div class="field">
+    <%= f.text_field :title, :width => 30 %><br>
+    <%= f.text_area :content, :size => "35x5" %>
+  </div>
+  <%= f.hidden_field :user_id, {:value => current_user.id} %>
+  <div class="action">
+    <%= f.submit 'Post' %>
+  </div>
+  <% end %>
+</div>
+</div>
+
+<h1><%= @project.name %></h1>
 
 <p>
-  <h1><%= @project.name %></h1>
-</p>
-
-<p>
-  <b>Description:</b>
+  <b>Description:</b><br>
   <%= @project.description %>
 </p>
-
-<p>
-  <b>Owners</b><br>
+  <b>Members:</b><br>
   <% @owners.each do |assignment| %>
-    <%= User.find(assignment.user_id).username %> <br>
+    <i><%= link_to User.find(assignment.user_id).username, user_path(User.find(assignment.user_id)) %></i><br>
+  <% end %>
+  <% (@project.users - @project.owners).each do |user| %>
+    <% user = user.becomes(User) %> 
+    <%= link_to user.username, user_path(user) %> <br>
   <% end %>
 </p>
 
-<p>
-  <b>Members</b><br>
-  <% @project.users.each do |user| %>
-    <% user = user.becomes(User) %> 
-    <%= user.username %> <br>
-  <% end %>
-</p>
+<div style="width: 900px;">
+
+
+
+<% unless @project.project_updates.length <= 1 then %>
+  <h2>Project Blog</h2>
+    <% @project.project_updates.reverse.each do |update| %>
+    
+    <% if update.user_id then %>
+    <div style="padding-left: 20px; padding-bottom: 40px;">
+      <h3><%= update.title %></h3><i>by 
+      
+      <% if update.user_id then %>
+	    <b> <%= link_to update.user.username, user_path(update.user) %> </b> wrote:
+	    <% end %> @ 
+	    
+	    <% if update.created_at then %>
+	    <i><%= update.created_at.getlocal.strftime("%m/%d/%Y @ %H:%M") %></i>
+	    <% else %>
+	    <%= update.created_at %>
+	    <% end %>
+	    
+	    </i><br><br>
+      <div style="padding-left: 20px;"><%= update.content %></div>
+    </div>
+    <% end %>
+    <% end %>
+<% end %>
+</div>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

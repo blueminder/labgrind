@@ -135,4 +135,9 @@ table#transactions td:nth-child(7) {
     text-align: center;
     padding: 6px;
     border: 1px solid #000;
+
+#project_info {
+  float:right;
+  padding: 15px;
+  background: #FDFCDC;
 }
