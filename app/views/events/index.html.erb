@@ -1,5 +1,9 @@
 <h1> All Calendar Events </h1>
 
+<div style="float:left">
+  <%= raw(event_calendar) %>
+</div>
+<!--
 <table>
   <tr>
     <th> Name </th>
@@ -19,7 +23,7 @@
     </tr>
   <% end %>
 </table>
-
+-->
 <br />
 <%= if current_user.is_admin? then
       link_to "New Event", new_event_path

@@ -7,6 +7,9 @@ class Event < ActiveRecord::Base
   belongs_to :lab
   belongs_to :project
 
+  has_event_calendar(:start_at_field => 'start_time',
+                     :end_at_field => 'end_time')
+
   # Checks to see if, at any point, this event is running concurrently with
   # another event.
   def overlaps? other
