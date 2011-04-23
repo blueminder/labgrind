@@ -39,20 +39,26 @@
 
 
 
-<% unless @project.project_updates.length <= 0 then %>
+
   <h2>Project Blog</h2>
+<% unless @project.project_updates.length <= 1 then %>
+    
     <% @project.project_updates.reverse.each do |update| %>
     
     <% if update.user_id then %>
     <div style="padding-left: 20px; padding-bottom: 40px;" class="project_entry">
       
+      <% if (update.user_id == current_user.id) || current_user.owns?(@project) then %>
       <div class="entry_options">
       <%= link_to image_tag("/images/delete.png"), project_project_update_path(@project,update), :confirm => 'Are you sure?', :method => :delete %>
       </div>
+      <% end %>
     
+      
       <b>
-      <div class="edit_title" id="<%= update.id %>" name="title"><%= update.title %></div>
+      <div <% if (update.user_id == current_user.id) || current_user.owns?(@project) then %>class="edit_title"<% end %> id="<%= update.id %>" name="title"><%= update.title %></div>
       </b>
+      
       
       
       <i>by 
@@ -68,10 +74,12 @@
 	    <% end %>
 	    
 	    </i><br><br>
-	    <div style="padding-left: 20px;" class="edit_content" id="<%= update.id %>" name="content"><%= update.content %></div>
+	    <div style="padding-left: 20px;" <% if (update.user_id == current_user.id) || current_user.owns?(@project) then %>class="edit_content"<% end %> id="<%= update.id %>" name="content"><%= update.content %></div>
     </div>
     <% end %>
     <% end %>
+<% else %>
+  No project updates available.
 <% end %>
 </div>
 
