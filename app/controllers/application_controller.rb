@@ -97,6 +97,16 @@ class ApplicationController < ActionController::Base
     true
   end
 
+  def require_project_member(project)
+    unless current_user.belongs_to? project or current_user.is_super_admin?
+      flash[:notice] =
+        "Only members of that project can access that."
+      redirect_back_or_default(current_user.becomes User)
+      return false
+    end
+    true
+  end
+
   # Prohibits access to this page if the user is logged in. In other words,
   # this should be required only for the login or registration pages.
   def require_no_user

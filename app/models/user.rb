@@ -60,6 +60,10 @@ class User < ActiveRecord::Base
     project and project.owners.include? self
   end
 
+  def member_of? project
+    project and project.members.include? self
+  end
+
   private
 
   # Update which skills this user has.
