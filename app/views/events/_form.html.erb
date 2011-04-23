@@ -25,13 +25,23 @@
     <%= f.hidden_field :lab_id, {:value => current_user.lab_id} %>
     <strong>In <%= current_user.lab.name %></strong>
   <% end %>
+
   <div class="field">
-    <%= f.label :start %>
-    <%= f.datetime_select :start_time %>
+    <%= f.label :date %>
+    <input id="event_date" name="event[date]" size="30" type="text" />
+
+    <script type="text/javascript">
+      $('#event_date').datepicker({dateFormat: "yy-mm-dd"});
+    </script>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_time %>
+    <%= f.time_select :start_time, {:minute_step => 10, :ignore_date => true} %>
   </div>
   <div class="field">
-    <%= f.label :end %>
-    <%= f.datetime_select :end_time %>
+    <%= f.label :end_time %>
+    <%= f.time_select :end_time, {:minute_step => 10, :ignore_date => true} %>
   </div>
   <div class="field">
     Reserve the lab for this event?

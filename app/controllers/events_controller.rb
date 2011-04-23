@@ -42,9 +42,20 @@ class EventsController < ApplicationController
     end
   end
 
+  def fiddle_around_with_the_params params
+    date = params.delete "date"
+    parts = date.split "-"
+    1.upto(3) do |i|
+      ["start", "end"].each do |t|
+        params["#{t}_time(#{i}i)"] = parts[i-1];
+      end
+    end
+    params
+  end
+
   # Commits the changes to a new event
   def create
-    @event = Event.new(params[:event])
+    @event = Event.new(fiddle_around_with_the_params(params[:event]))
     if @event.project then
       return false unless require_project_owner(@event.project)
     else
@@ -75,7 +86,7 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(fiddle_around_with_the_params(params[:event]))
         format.html { redirect_to(@event, :notice => 'Event updated.') }
         format.xml  { head :ok }
       else

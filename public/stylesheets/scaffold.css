@@ -99,3 +99,22 @@ table#transactions td:nth-child(7) {
     color: #ff0000;
     font-weight: bold;
 }
+
+.ui-datepicker {
+    background-color: #ffffff;
+    border: 1px solid black;
+    display: none;
+}
+
+.ui-datepicker-prev {
+    float: left;
+}
+
+.ui-datepicker-next {
+    text-align: right;
+    float: right;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+}
