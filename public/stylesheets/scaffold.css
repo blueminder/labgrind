@@ -99,3 +99,9 @@ table#transactions td:nth-child(7) {
     color: #ff0000;
     font-weight: bold;
 }
+
+#project_info {
+  float:right;
+  padding: 15px;
+  background: #FDFCDC;
+}

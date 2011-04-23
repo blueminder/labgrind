@@ -1,6 +1,8 @@
 Labgrind::Application.routes.draw do
 
-  resources :projects
+  resources :projects do
+    resources :project_updates
+  end
 
   resources :users do
     resources :skills

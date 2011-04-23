@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   has_many :project_assignments
   has_many :users, :through => :project_assignments
+  has_many :project_updates
   has_many :events
   
   def add_owner(user)
