@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   has_many :events
  
   has_many :project_images, :dependent => :destroy
-  accepts_nested_attributes_for :project_images, :allow_destroy => true
+  accepts_nested_attributes_for :project_images, :allow_destroy => true, :reject_if => proc { |attrs| attrs['image'].blank? }
   
   # Makes the user of a project an owner
   def add_owner(user)
