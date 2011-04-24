@@ -16,6 +16,7 @@
     <%= f.label :username %><br />
     <%= f.text_field :username %>
   </div>
+  
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
@@ -27,6 +28,10 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :bio %><br />
+    <%= f.text_area :bio %>
   </div>
   <% if current_user.is_admin? then %>
     <div class="field">

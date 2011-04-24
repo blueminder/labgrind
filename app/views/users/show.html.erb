@@ -11,6 +11,15 @@
   </p>
   
   <p>
+    <b>Bio</b><br>
+    <% if @user.bio.nil? || @user.bio.empty? %>
+      No Bio.
+    <% else %>
+      <%= @user.bio %>
+    <% end %>
+  </p>
+  
+  <p>
     <b>User Skills</b><br>
     <% if @user.skills.empty? %>
       None :(
