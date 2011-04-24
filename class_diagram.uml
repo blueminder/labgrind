@@ -19,7 +19,7 @@ digraph Classes {
     subgraph {
 	 rank = "source"
         ApplicationController [
-			      label = "{ApplicationController|-params : map(string, string)|+current_user_session() : UserSession\l+current_user() : User\l+require_user() : void\l+require_admin() : void\l+require_no_user() : void\l+store_location() : void\l+redirect_back_or_default(default : string) : void\l}"
+			      label = "{ApplicationController|-params : map(string, string)|+current_user_session() : UserSession\l+current_user() : User\l+require_user() : boolean\l+require_admin() : boolean\l+require_super_admin() : boolean\l+require_lab_admin(Lab) : boolean\l+require_project_owner(Project) : boolean\l+require_no_user() : boolean\l+store_location() : void\l+redirect_back_or_default(default : string) : void\l}"
                               ]
     }
 

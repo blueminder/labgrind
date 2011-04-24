@@ -51,18 +51,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # Munges the event input parameters to be acceptable to the Event object.
-  def fiddle_around_with_the_params params
-    date = params.delete "date"
-    parts = date.split "-"
-    1.upto(3) do |i|
-      ["start", "end"].each do |t|
-        params["#{t}_time(#{i}i)"] = parts[i-1];
-      end
-    end
-    params
-  end
-
   # Commits the changes to a new event
   def create
     @event = Event.new(fiddle_around_with_the_params(params[:event]))
@@ -123,5 +111,19 @@ class EventsController < ApplicationController
       format.html { redirect_to(events_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  # Munges the event input parameters to be acceptable to the Event object.
+  def extract_date_from_params params
+    date = params.delete "date"
+    parts = date.split "-"
+    1.upto(3) do |i|
+      ["start", "end"].each do |t|
+        params["#{t}_time(#{i}i)"] = parts[i-1];
+      end
+    end
+    params
   end
 end
