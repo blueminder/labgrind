@@ -37,15 +37,43 @@
 
 <div style="width: 900px;">
 
+
 <% unless @project.project_images.empty? %>
   <p>
-    <b>Attachments</b><br>
-    <% @project.project_images.each do |i| %>
-      <%= image_tag i.image.url(:large) %>
-    <% end %>
+    <h2>Project Images</h2>
+    <a class="prev browse left"></a>
+    <div class="scrollable">  
+        <div class="items">
+          <% @project.project_images.each_with_index do |i,index| %>
+          <% if index%3==0 %>
+            <% if index != @project.project_images.length %>
+          <div>
+            <% end %>
+          <% end %>       
+            <%= link_to image_tag(i.image.url(:large_thumb)), i.image.url(:full) %>
+          <% if index>0 && index == @project.project_images.length-1 || (index+1)%3==0 %>
+          </div>
+            <% end %>
+        <% end %>
+        </div>
+     </div>
+   </div>
+   <a class="next browse right"></a>
   </p>
 <% end %>
 
+<script>
+// execute your scripts when the DOM is ready. this is mostly a good habit
+$(function() {
+
+	// initialize scrollable
+	$(".scrollable").scrollable();
+	$('.items a').lightBox();
+
+});
+</script>
+
+<br clear="all">
   <h2>Project Blog</h2>
 <% unless @project.project_updates.length <= 1 then %>
     

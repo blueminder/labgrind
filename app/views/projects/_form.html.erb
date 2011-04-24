@@ -35,15 +35,35 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  
+  Image Upload
   <div class="newPaperclipFiles">
+    <% index = 0 %>
     <%= f.fields_for :project_images do |project_image| %>
       <% if project_image.object.new_record? %>
-        <%= project_image.file_field :image %>
+        <% if project_image.object.new_record? %>
+        <div class="upload_image" id="i<%= index %>">
+        <%= project_image.file_field :image %><br>
+        <%= project_image.text_field :caption %>
+        </div>
+        <% end %>
+        <% index = index + 1 %>
       <% end %>
     <% end %>
+    <a id="show_up">Add Another Image</a>
+    <script>
+      var index = 1;
+      $('#show_up').click(function() {
+        if (index<10) {
+          $('#i'+index).show('fast', function() {});
+          index = index + 1;
+        } else {
+          alert('Sorry, you can only upload 10 images at a time.');
+        }        
+      });
+    </script>
   </div>
-  
+  <br clear="true">
+  Delete Old Images
   <div class="existingPaperclipFiles">
     <%= f.fields_for :project_images do |project_image| %>
       <% unless project_image.object.new_record? %>
@@ -53,6 +73,7 @@
           <%= link_to project_image.object.image.url, project_image.object.image.url %>
         <% end %>
         <%= project_image.check_box :_destroy %>
+        <br>
       <% end %>
     <% end %>
   </div>
