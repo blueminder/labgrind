@@ -53,7 +53,7 @@ class EventsController < ApplicationController
 
   # Commits the changes to a new event
   def create
-    @event = Event.new(fiddle_around_with_the_params(params[:event]))
+    @event = Event.new(extract_date_from_params(params[:event]))
     if @event.project then
       return false unless require_project_owner(@event.project)
     else
@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      if @event.update_attributes(fiddle_around_with_the_params(params[:event]))
+      if @event.update_attributes(extract_date_from_params(params[:event]))
         format.html { redirect_to(@event, :notice => 'Event updated.') }
         format.xml  { head :ok }
       else
