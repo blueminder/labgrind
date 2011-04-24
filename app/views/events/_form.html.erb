@@ -28,8 +28,7 @@
 
   <div class="field">
     <%= f.label :date %>
-    <input id="event_date" name="event[date]" size="30" type="text" />
-
+    <%= text_field_tag("event[date]", @event.start_time.to_date, :size => 30) %>
     <script type="text/javascript">
       $('#event_date').datepicker({dateFormat: "yy-mm-dd"});
     </script>
