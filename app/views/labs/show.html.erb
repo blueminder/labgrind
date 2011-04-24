@@ -1,16 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <h1><%= @lab.name %></h1>
+  <h1>Lab: <%= @lab.name %></h1>
 </p>
 
 <p>
   <b>Items in this lab:</b>
+  <% unless @lab.items.nil? || @lab.items.empty? %>
   <ul>
     <% @lab.items.each do |item| %>
       <li><%= link_to item.name, item %></li>
     <% end %>
   </ul>
+  <% else %>
+    <br>No items currently in this lab.
+  <% end %>
 </p>
 
 <% if current_user.administers_lab?(@lab) %>
