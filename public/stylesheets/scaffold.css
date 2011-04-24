@@ -61,6 +61,11 @@ div.field, div.actions {
   background: #FDFCDC;
 }
 
+.entry_options {
+    display: none;
+    float: right;
+}
+
 table.red {
     border-spacing: 0px;
     border-collapse: collapse;
@@ -146,11 +151,9 @@ table#transactions td:nth-child(7) {
 
 .project_entry {
   padding: 10px;
+  width: 800px;
 }
 
-.entry_options {
-    display: none;
-    float: right;
-}
+
 
 

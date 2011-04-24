@@ -1,23 +1,20 @@
-<h1>Projects</h1>
-
-<table class="red">
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>All Projects</h1>
 
 <% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+
+  <div  class="project_entry">
+  <% if current_user.owns?(project) then %>
+  <div class="entry_options">
+  <%= link_to image_tag("/images/edit.png"), edit_project_path(project) %> 
+  <%= link_to image_tag("/images/delete.png"), project, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+  <% end %>
+  <%= link_to project.name, project %>
+  <p style="padding-left: 10px;"><%= project.description %></p>
+  </div>
+
 <% end %>
-</table>
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'Create New Project', new_project_path %>
