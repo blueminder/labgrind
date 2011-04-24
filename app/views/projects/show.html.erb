@@ -37,8 +37,14 @@
 
 <div style="width: 900px;">
 
-
-
+<% unless @project.project_images.empty? %>
+  <p>
+    <b>Attachments</b><br>
+    <% @project.project_images.each do |i| %>
+      <%= image_tag i.image.url(:large) %>
+    <% end %>
+  </p>
+<% end %>
 
   <h2>Project Blog</h2>
 <% unless @project.project_updates.length <= 1 then %>

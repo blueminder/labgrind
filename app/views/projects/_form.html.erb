@@ -14,7 +14,7 @@
    
 </script>
 
-<%= form_for(@project) do |f| %>
+<%= form_for(@project, :html => {:multipart => true}) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -34,6 +34,27 @@
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
+  </div>
+  
+  <div class="newPaperclipFiles">
+    <%= f.fields_for :project_images do |project_image| %>
+      <% if project_image.object.new_record? %>
+        <%= project_image.file_field :image %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="existingPaperclipFiles">
+    <%= f.fields_for :project_images do |project_image| %>
+      <% unless project_image.object.new_record? %>
+        <% if project_image.object.image.content_type =~ /^image/ %>
+          <%= link_to( image_tag(project_image.object.image.url(:large)), project_image.object.image.url(:original) ) %>
+        <% else %>
+          <%= link_to project_image.object.image.url, project_image.object.image.url %>
+        <% end %>
+        <%= project_image.check_box :_destroy %>
+      <% end %>
+    <% end %>
   </div>
   
   <% if current_user.owns? @project or current_user.is_super_admin? %>

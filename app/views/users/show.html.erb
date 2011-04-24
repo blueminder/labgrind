@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+
+
+<table>
+<tr><td>
+<%= image_tag @user.avatar.url(:large) %>
+</td>
+<td>
+<div id="content">
+
 <h2>
   <%= @user.username %>
 </h2>
 
-<%= image_tag @user.avatar.url(:large) %>
-
-<div id="content">
   <p>
     <b>Email</b><br>
     <%= @user.email %>
@@ -21,7 +27,10 @@
     <% end %>
   </p>
   
-  <p>
+ 
+  </tr></table>
+  
+   <p>
     <b>User Skills</b><br>
     <% if @user.skills.empty? %>
       None :(
