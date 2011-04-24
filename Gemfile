@@ -35,3 +35,4 @@ gem 'jquery-rails', '>= 0.2.6'
 
 gem 'event-calendar'
 gem 'paperclip'
+gem 'rmagick'

@@ -2,7 +2,6 @@ Labgrind::Application.routes.draw do
 
   resources :projects do
     resources :project_updates do
-      
     end
   end
 
