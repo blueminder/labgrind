@@ -8,7 +8,8 @@ class ProjectUpdatesController < ApplicationController
     @annotation = @project.project_updates.create(params[:project_update])
     redirect_to project_path(@project)
   end
-  
+
+  # Commits an update to the project
   def update
     @project = Project.find(params[:project_id])
     @update = @project.project_updates.find(params[:id])
