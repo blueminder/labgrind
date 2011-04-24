@@ -39,10 +39,28 @@
 
 <% unless @project.project_images.empty? %>
   <p>
-    <b>Attachments</b><br>
-    <% @project.project_images.each do |i| %>
-      <%= image_tag i.image.url(:large) %>
-    <% end %>
+    <b>Project Images</b><br>
+    <a class="prev browse left"></a>
+    <div class="scrollable">  
+        <div class="items">
+          <% @project.project_images.each_with_index do |i,index| %>
+          <% if index%3==0 %>
+            <% if index>0 || index == @project.project_images.length-1 %>
+          </div>
+            <% end %>
+            <% if index != @project.project_images.length %>
+          <div>
+            <% end %>
+          <% end %>
+            <%= image_tag i.image.url(:medium) %>
+          <% if index>0 && index == @project.project_images.length-1 %>
+          </div>
+            <% end %>
+        <% end %>
+        </div>
+     </div>
+   </div>
+   <a class="next browse right"></a>
   </p>
 <% end %>
 
