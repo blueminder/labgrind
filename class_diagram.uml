@@ -19,9 +19,13 @@ digraph Classes {
     subgraph {
 	 rank = "source"
         ApplicationController [
-			      label = "{ApplicationController|-params : map(string, string)|+current_user_session() : UserSession\l+current_user() : User\l+require_user() : boolean\l+require_admin() : boolean\l+require_super_admin() : boolean\l+require_lab_admin(Lab) : boolean\l+require_project_owner(Project) : boolean\l+require_no_user() : boolean\l+store_location() : void\l+redirect_back_or_default(default : string) : void\l}"
+			      label = "{ApplicationController|-params : Hash|+current_user_session() : UserSession\l+current_user() : User\l+require_user() : boolean\l+require_admin() : boolean\l+require_super_admin() : boolean\l+require_lab_admin(Lab) : boolean\l+require_project_owner(Project) : boolean\l+require_project_member(Project) : boolean\l+require_no_user() : boolean\l+store_location() : void\l+redirect_back_or_default(default : string) : void\l}"
                               ]
     }
+
+    ApplicationHelper [
+    	label = "{ApplicationHelper||+month_link(datetime) : string\l+event_calendar_options() : Hash\l+event_calendar() : string\l}"
+    ]
 
     subgraph {
 	 rank = "same"
@@ -43,8 +47,12 @@ digraph Classes {
                        ]
     
         ProjectsController [
-			label = "{ProjectsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
+			label = "{ProjectsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l+update_entry_title() : void\l+update_entry_content() : void\l}"
                         ]
+
+	ProjectUpdatesController [
+			label = "{ProjectUpdatesController||+create() : void\l+update() : void\l+destroy() : void\l}"
+	]
 
         SkillsController [
 			 label = "{SkillsController||+index() : void\l+show() : void\l+new() : void\l+edit() : void\l+create() : void\l+update() : void\l+destroy() : void\l}"
@@ -97,11 +105,19 @@ digraph Classes {
 	]
     
         Project [
-		label = "{Project|+name : string\l+description : string\l|}"
+		label = "{Project|+name : string\l+description : string\l|+add_owner(User) : void\l+remove_owner(User) : void\l+owners() : List<User>\l}"
 	]
 
 	ProjectAssignment [
 		label = "{ProjectAssignment|+owner : boolean\l+created_at : datetime\l+updated_at : datetime\l|}"
+	]
+
+	ProjectImage [
+		label = "{ProjectImage|+image_file_name : string\l+image_content_type : string\l+image_file_size : integer\l+image_updated_at : datetime\l|}"
+	]
+
+	ProjectUpdate [
+		label = "{ProjectUpdate|+title : string\l+content : string\l+created_at : datetime \l+updated_at : datetime\l|}"
 	]
 
         Skill [
@@ -113,7 +129,7 @@ digraph Classes {
                 ]
     
         User [
-                 label = "{User|+username : string\l+email : string\l+crypted_password : string\l+password_salt : string\l+persistence_token : string\l+created_at : datetime\l|-update_skills() : void\l+is_admin?() : boolean\l+is_super_admin?() : boolean\l+owns?(Project) : boolean\l+administers_lab?(Lab) : boolean\l}"
+                 label = "{User|+username : string\l+email : string\l+bio : string\l+avatar_file_name : string\l+avatar_content_type : string\l+avatar_file_size : integer\l+avatar_updated_at : datetime\l+crypted_password : string\l+password_salt : string\l+persistence_token : string\l+created_at : datetime\l|-update_skills() : void\l+is_admin?() : boolean\l+is_super_admin?() : boolean\l+owns?(Project) : boolean\l+member_of?(Project) : boolean\l+administers_lab?(Lab) : boolean\l}"
          ]
     
         UserSession [
@@ -154,6 +170,9 @@ digraph Classes {
     Project -> ProjectAssignment
     User -> ProjectAssignment
 
+    Project -> ProjectUpdate
+    Project -> ProjectImage
+
     edge [
          taillabel = "0..n"
          len = 1.0
@@ -166,6 +185,7 @@ digraph Classes {
          taillabel = "1"
          ]
     User -> UserSession
+    ApplicationController -> ApplicationHelper
 
     UsersController -> User
     TransactionsController -> Transaction
@@ -176,6 +196,7 @@ digraph Classes {
     SkillsController -> Skill
     EventsController -> Event
     ProjectsController -> Project
+    ProjectUpdatesController -> ProjectUpdate
 
     edge [
           arrowhead = "empty"
@@ -192,6 +213,7 @@ digraph Classes {
     SkillsController -> ApplicationController
     EventsController -> ApplicationController
     ProjectsController -> ApplicationController
+    ProjectUpdatesController -> ApplicationController
 
     
 
