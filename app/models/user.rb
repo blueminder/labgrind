@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :project_assignments
   has_many :project_updates
 
-  has_attached_file :avatar, :styles => { :large => "120x120>", :medium => "48x48>", :thumb => "26x26>" }
+  has_attached_file :avatar, 
+                    :styles => { :large => "120x120>", :medium => "48x48>", :thumb => "26x26>" },
+                    :default_url => "/images/missing.png"
   
   attr_accessor :skill_list
   after_save :update_skills
