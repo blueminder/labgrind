@@ -67,7 +67,8 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
+  # Commits an update to the entry title
   def update_entry_title
     @entry = ProjectUpdate.find(params[:id])
     @entry.title = params[:value]
@@ -75,6 +76,7 @@ class ProjectsController < ApplicationController
     render :text => params[:value]
   end
 
+  # Commits an update to the entry content
   def update_entry_content
     @entry = ProjectUpdate.find(params[:id])
     @entry.content = params[:value]

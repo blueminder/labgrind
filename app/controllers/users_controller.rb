@@ -67,11 +67,16 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(:users, :notice => 'Registration successful.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-	  elsif params[:make_admin]
+		if params[:make_admin]
 		  # Admins will get redirected to the labs_url to make more stuff
-		  format.html { render labs_url }
+		  format.html { redirect_to('/labs',
+			:notice => 'Initial configuration succesful, please make labs.') }
+		else
+          format.html { redirect_to(:users, :notice => 'Registration successful.') }
+          format.xml  { render :xml => @user, :status => :created, :location => @user }
+		end
+	  elsif params[:make_admin]
+		  format.html { render "user_sessions/init_config" }
 	  else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
