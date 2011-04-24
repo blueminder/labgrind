@@ -52,7 +52,7 @@
           <div>
             <% end %>
           <% end %>
-            <%= image_tag i.image.url(:medium) %>
+            <%= image_tag i.image.url(:large) %>
           <% if index>0 && index == @project.project_images.length-1 %>
           </div>
             <% end %>
@@ -63,7 +63,18 @@
    <a class="next browse right"></a>
   </p>
 <% end %>
+<script>
+// execute your scripts when the DOM is ready. this is mostly a good habit
+$(function() {
 
+	// initialize scrollable
+	$(".scrollable").scrollable();
+
+});
+</script>
+
+
+<br clear="all">
   <h2>Project Blog</h2>
 <% unless @project.project_updates.length <= 1 then %>
     
