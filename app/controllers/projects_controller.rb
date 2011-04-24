@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-    10.times { @project.project_images.build }
+    1.times { @project.project_images.build }
     
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
-    10.times { @project.project_images.build }
+    1.times { @project.project_images.build }
 
     return false unless require_project_owner(@project)
 
