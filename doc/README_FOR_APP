@@ -91,13 +91,6 @@ of requests than just GET and POST).
 - test/fixtures
   This contains files that will prefill database tables for running the tests.
 
-- test/functional
-  These tests are run to make sure that the controllers work properly
-
-- test/performance
-  These are tests for measuring server performance. As performance is not a goal
-  for this application, we do not have any useful tests in here.
-
 - test/unit
   These tests run unit tests on the model code, to make sure that all of the
   functions work properly.

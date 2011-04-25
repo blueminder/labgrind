@@ -4,7 +4,9 @@ class UserSessionsController < ApplicationController
 	before_filter :require_no_user, :except => [:create, :destroy]
 
   # GET /user_sessions/new
-  # GET /user_sessions/new.xml
+  # This is also what you are redirected to if you have yet to log in.
+  # There is also code here for dealing with the case where the server has yet
+  # to have any accounts
   def new
 	if User.count == 0
 	  @user = Admin.new
