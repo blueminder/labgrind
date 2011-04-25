@@ -133,6 +133,59 @@
   <% end %>
 </div>
 
+<% if current_user.is_super_admin? %>
+  <%# Display adminification forms %>
+  <% unless @user.is_super_admin? %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "superadminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag("Make SUPER Admin",
+		     :confirm =>
+<<end_of_string
+Are you REALLY sure you want to make #{@user.username} a super-administrator?
+
+I mean, REALLY REALLY sure?
+
+Because this can basically never be undone, ever, unless you have access to \
+the underlying databases.
+end_of_string
+)%>
+    <% end %>
+    <br />
+  <% end %>
+  <% unless @user.is_admin? %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "adminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag("Make admin of...",
+		     :confirm =>
+<<end_of_string
+Are you sure you want to make #{@user.username} an administrator of that lab?
+end_of_string
+)%>
+      <%= select_tag(:lab_id,
+		     options_from_collection_for_select(Lab.all, :id, :name)) %>
+    <% end %>
+    <br />
+  <% end %>
+  <% if @user.is_admin? and not(@user.is_super_admin?) %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "deadminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag("Make regular user",
+		     :confirm =>
+<<end_of_string
+Are you sure you want to strip admin rights from #{@user.username}?
+
+They probably won't be too happy about it, unless they know it's coming.
+end_of_string
+)%>
+    <% end %>
+    <br />
+  <% end %>
+<% end %>
+  
+
 <% if current_user.is_admin? %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>

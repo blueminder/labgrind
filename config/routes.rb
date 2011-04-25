@@ -38,6 +38,9 @@ Labgrind::Application.routes.draw do
   match "/projects/update_entry_title" => "projects#update_entry_title"
   match "/projects/update_entry_content" => "projects#update_entry_content"
   match "/projects/:project_id/project_updates/:id" => 'project_updates#delete'
+  match "/users/adminify" => 'users#adminify'
+  match "/users/superadminify" => 'users#superadminify'
+  match "/users/deadminify" => 'users#deadminify'
   
 
   root :to => 'user_sessions#new', :as => :login
