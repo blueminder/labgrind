@@ -1,4 +1,4 @@
-<h1>User Profiles</h1>
+<h1>Members</h1>
 <p id="notice"><%= notice %></p>
 
   
@@ -13,7 +13,7 @@
 <% end %>
   
     <table class="red" width="400">  
-  <tr><td valign="top" width="100"><%= image_tag user.avatar.url(:medium) %></td>
+  <tr><td valign="top" width="100"><%= link_to image_tag(user.avatar.url(:medium)), user_path(user) %></td>
   <td>
 	<%= link_to user.username, user_path(user) %><br>
   <% if user.is_admin? %>

@@ -1,28 +1,26 @@
-<h1>Available Labs</h1>
-
-<table class="red">
-  <tr>
-    <th>Laboratory</th>
-    <% if current_user.is_a? Admin %>
-      <th></th>
-      <th></th>
-    <% end %>
-  </tr>
+<h1>Laboratories</h1>
   
   <% @labs.each do |lab| %>
-    <tr>
-      <td><%= link_to lab.name, lab %></td>
-      <% if current_user.class_type == "Admin" %>
-	<td><%= link_to 'Edit', edit_lab_path(lab) %></td>
-	<td><%= link_to 'Destroy', lab, :confirm => 'Are you sure?', \
-		:method => :delete %></td>
-      <% end %>
-    </tr>
+
+  <div  class="project_entry">
+  <% if current_user.administers_lab?(lab) then %>
+  <div class="entry_options">
+  <%= link_to image_tag("/images/edit.png"), edit_lab_path(lab) %> 
+  <%= link_to image_tag("/images/delete.png"), lab, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
   <% end %>
-</table>
+  <table class="red" width="400"> 
+  <tr>
+      <td><%= link_to lab.name, lab %></td>
+  </tr>
+	</table>
+		
+  </div>
+		
+  <% end %>
 
 <br />
 
-<% if current_user.class_type == "Admin" %>
+<% if current_user.is_super_admin? %>
   <%= link_to 'New Lab', new_lab_path %>
 <% end %>

@@ -75,15 +75,33 @@ $(document).ready(function() {
   
   $(".project_entry").mouseover(function(event) {
     $(this).css('background','#ffffcc'); 
-    $('.entry_options').show();
+    $(this).children('.entry_options').show();
   });
   
   $(".project_entry").mouseout(function(event) {
     $(this).css('background',''); 
-    $('.entry_options').hide();
+    $(this).children('.entry_options').hide();
   });
   
-
+  $("#member.project_entry").mouseover(function(event) {
+    $(this).css('background','#ffcc99'); 
+    $(this).children('.entry_options').show();
+  });
+  
+  $("#member.project_entry").mouseout(function(event) {
+    $(this).css('background','#ffcc99'); 
+    $(this).children('.entry_options').hide();
+  });
+  
+  $("#owner.project_entry").mouseover(function(event) {
+    $(this).css('background','#ff9999'); 
+    $(this).children('.entry_options').show();
+  });
+  
+  $("#owner.project_entry").mouseout(function(event) {
+    $(this).css('background','#ff9999'); 
+    $(this).children('.entry_options').hide();
+  });
   
   $(".user_entry").mouseover(function(event) {
     $(this).css('background','#ffffcc'); 

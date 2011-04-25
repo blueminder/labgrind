@@ -1,25 +1,14 @@
-<h1>Listing skills</h1>
-
-<table class="red">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Skills</h1>
   
   <% @skills.each do |skill| %>
-    <tr>
-      <td><%= skill.name %></td>
-      <td><%= skill.description %></td>
-      <td><%= link_to 'Show', skill %></td>
-      <td><%= link_to 'Edit', edit_skill_path(skill) %></td>
-      <td><%= link_to 'Destroy', skill, :confirm => 'Are you sure?', \
-	      :method => :delete %></td>
-    </tr>
+  <div class="project_entry">
+  <div class="entry_options">
+  <%= link_to image_tag("/images/edit.png"), edit_skill_path(skill) %> 
+  <%= link_to image_tag("/images/delete.png"), skill, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+  <table class="red" width="400"><tr><td><%= skill.name %></td></tr></table>
+  </div>
   <% end %>
-</table>
 
 <br />
 

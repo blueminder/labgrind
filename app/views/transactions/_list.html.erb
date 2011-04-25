@@ -1,3 +1,6 @@
+<% if @transactions.empty? %>
+No pending transactions at this time
+<% else %>
 <table id="transactions" class="red">
   <tr> <th> Type </th> <th> User </th> <th> Item </th>
     <th> Status </th> <th> Timestamp </th> </tr>
@@ -50,3 +53,4 @@
     </tr>
   <% end %>
 </table>
+<% end %>

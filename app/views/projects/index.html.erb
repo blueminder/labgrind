@@ -1,16 +1,24 @@
-<h1>All Projects</h1>
+<h1>Projects</h1>
 
 <% @projects.each do |project| %>
 
-  <div  class="project_entry">
-  <% if current_user.owns?(project) then %>
+  <div  class="project_entry" <% if current_user.member_of?(project) %>id="member"<% end %>>
+  <% if current_user.owns?(project) || current_user.is_super_admin? then %>
   <div class="entry_options">
   <%= link_to image_tag("/images/edit.png"), edit_project_path(project) %> 
   <%= link_to image_tag("/images/delete.png"), project, :confirm => 'Are you sure?', :method => :delete %>
   </div>
   <% end %>
-  <%= link_to project.name, project %>
-  <p style="padding-left: 10px;"><%= project.description %></p>
+  <table class="red" width="400">  
+  <tr><td valign="top" width="80"><%= link_to project.name, project %></td>
+  <td style="text-align: left;">
+  <%= project.description %><br>
+  <small>Users:
+  <% users = project.users.map{ |u| u.username } %>
+  <%= users.to_sentence %></small>
+  </td>
+  </tr>
+  </table>
   </div>
 
 <% end %>
