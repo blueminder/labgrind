@@ -10,9 +10,23 @@
   </tr>
   
   <% @users.each do |user| %>
+  
     <tr>
       <td>
-	<%= link_to user.username, user_path(user) %>
+      
+      
+    <table class="red">  
+  <tr><td valign="top"><%= image_tag user.avatar.url(:medium) %></td>
+  <td>
+	<%= link_to user.username, user_path(user) %><br>
+  <% if user.is_admin? %>
+  Administrator
+  <% else %>
+  User
+  <% end %>
+  </td></tr>
+  </table>
+  
 	<% if current_user == user %>
 	  <b>* </b>
 	<% end %>
