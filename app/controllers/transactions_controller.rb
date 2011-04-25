@@ -1,10 +1,8 @@
 # This is the controller which handles all of the transaction-related
-# shenanigans. Again, mostly Rails boilerplate.
+# actions.
 class TransactionsController < ApplicationController
   before_filter :require_user
 
-  # GET /transactions
-  # GET /transactions.xml
   # Shows an index listing all transactions.
   def index
     return false unless require_admin
@@ -78,8 +76,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # POST /transactions
-  # POST /transactions.xml
   # Creates a new transaction.
   def create
     if params[:item_id] then  # We're coming from an item page

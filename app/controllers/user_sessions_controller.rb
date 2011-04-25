@@ -1,9 +1,7 @@
 # This controller manages user sessions.
-# It is, again, generally Rails boilerplate.
 class UserSessionsController < ApplicationController  
 	before_filter :require_no_user, :except => [:create, :destroy]
 
-  # GET /user_sessions/new
   # This is also what you are redirected to if you have yet to log in.
   # There is also code here for dealing with the case where the server has yet
   # to have any accounts
@@ -21,8 +19,7 @@ class UserSessionsController < ApplicationController
     end
   end
 
-  # POST /user_sessions
-  # POST /user_sessions.xml
+  # Handles login of a user.
   def create
     @user_session = UserSession.new(params[:user_session])
 
@@ -37,8 +34,7 @@ class UserSessionsController < ApplicationController
     end
   end  
 
-  # DELETE /user_sessions/1
-  # DELETE /user_sessions/1.xml
+  # Handles logout of a user.
   def destroy
     @user_session = UserSession.find
     @user_session.destroy

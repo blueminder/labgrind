@@ -1,3 +1,3 @@
-# oh god what is this
+# Helper for annotations code. Unused.
 module AnnotationsHelper
 end

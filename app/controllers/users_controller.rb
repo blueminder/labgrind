@@ -12,8 +12,7 @@ class UsersController < ApplicationController
     @projects = Project.find(:all)
   end
 
-  # GET /users
-  # GET /users.xml
+  # Shows a list of all users.
   def index
     @users = User.all
 
@@ -23,8 +22,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
+  # Shows the page for a single user
   def show
     @user = User.find_by_username(params[:id])
 
@@ -34,8 +32,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
+  # Shows the page to register a new user.
   def new
     @user = User.new
 
@@ -45,7 +42,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # Makes edits to the user.
   def edit
     get_all_skills
     get_all_projects
@@ -53,8 +50,8 @@ class UsersController < ApplicationController
     return false unless require_specific_user(@user)
   end
 
-  # POST /users
-  # POST /users.xml
+  # Actually creates a new user. Note that this is also the method that will be
+  # called upon commiting the initial configuration page.
   def create
 	if User.count == 0 and params[:make_admin]
 		# Make a new admin if and only if no other users
@@ -84,8 +81,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
+  # Commits an update to a new user.
   def update
     @user = User.find_by_username(params[:id])
 
@@ -105,8 +101,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
+  # Deletes a new user. This action is only permissible by the user itself or
+  # by a superadmin.
   def destroy
     @user = User.find_by_username(params[:id])
 

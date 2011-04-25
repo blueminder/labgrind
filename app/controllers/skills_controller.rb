@@ -1,10 +1,8 @@
 # This controller handles skill-related administrative actions.
-# This is Enrique's domain, but it looks like this is pretty much just more
-# Rails boilerplate.
 class SkillsController < ApplicationController
   before_filter :require_admin
-  # GET /skills
-  # GET /skills.xml
+
+  # Shows the list of skills
   def index
     @skills = Skill.all
 
@@ -14,8 +12,7 @@ class SkillsController < ApplicationController
     end
   end
 
-  # GET /skills/1
-  # GET /skills/1.xml
+  # Shows the page for an individual skill
   def show
     @skill = Skill.find(params[:id])
 
@@ -25,8 +22,7 @@ class SkillsController < ApplicationController
     end
   end
 
-  # GET /skills/new
-  # GET /skills/new.xml
+  # Shows the page to make a new skill
   def new
     @skill = Skill.new
 
@@ -36,13 +32,12 @@ class SkillsController < ApplicationController
     end
   end
 
-  # GET /skills/1/edit
+  # Shows the page to edit a new skill
   def edit
     @skill = Skill.find(params[:id])
   end
 
-  # POST /skills
-  # POST /skills.xml
+  # Commits the creation of a new skill.
   def create
     @skill = Skill.new(params[:skill])
 
@@ -57,8 +52,7 @@ class SkillsController < ApplicationController
     end
   end
 
-  # PUT /skills/1
-  # PUT /skills/1.xml
+  # Commits an update of a skill page.
   def update
     @skill = Skill.find(params[:id])
 
@@ -73,8 +67,7 @@ class SkillsController < ApplicationController
     end
   end
 
-  # DELETE /skills/1
-  # DELETE /skills/1.xml
+  # Deletes a skill for real.
   def destroy
     @skill = Skill.find(params[:id])
     @skill.destroy

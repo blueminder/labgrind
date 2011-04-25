@@ -1,4 +1,5 @@
-# This is the controller to manage updates to projects by users.
+# This is the controller to manage updates to projects by users. In essence, it
+# is kind of a blog feature for projects.
 class ProjectUpdatesController < ApplicationController
   before_filter :require_user
 
@@ -17,9 +18,8 @@ class ProjectUpdatesController < ApplicationController
     @update.save
     render :text => params[:value]
   end
-  
-  # DELETE /projects/1/project_updates/1
-  # DELETE /projects/1/project_updates/1.xml
+
+  # Deletes this update on the project.  
   def destroy
     @project = Project.find(params[:project_id])
     @update = @project.project_updates.find( params[:id] )

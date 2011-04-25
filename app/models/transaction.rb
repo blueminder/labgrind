@@ -1,5 +1,5 @@
 # A transaction, such as someone checking equipment out, or checking it back in,
-# or sending it off for repair, or what have you.
+# or sending it off for repair. You should use a subclass instead of this class.
 class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :item

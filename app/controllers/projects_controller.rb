@@ -2,8 +2,7 @@
 class ProjectsController < ApplicationController
   before_filter :require_user
   
-  # GET /projects
-  # GET /projects.xml
+  # Shows the list of all projects
   def index
     @projects = Project.all
 
@@ -13,8 +12,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.xml
+  # Shows the page for a single lab. 
   def show
     @project = Project.find(params[:id])
     @owners = ProjectAssignment.find(:all, :conditions => { :project_id => @project.id, :owner => 1 })
@@ -25,8 +23,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.xml
+  # Shows the page to make a new project
   def new
     @project = Project.new
     10.times { @project.project_images.build }
@@ -37,7 +34,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1/edit
+  # Shows the page that allows editing of a project
   def edit
     @project = Project.find(params[:id])
     10.times { @project.project_images.build }
@@ -49,8 +46,7 @@ class ProjectsController < ApplicationController
     @passed_owners = params[:owners]
   end
 
-  # POST /projects
-  # POST /projects.xml
+  # Actually creates a new lab
   def create
     @project = Project.new(params[:project])
     @project.users << current_user
@@ -84,8 +80,7 @@ class ProjectsController < ApplicationController
     render :text => params[:value]
   end
   
-  # PUT /projects/1
-  # PUT /projects/1.xml
+  # Commits an update to the project itself
   def update
     @project = Project.includes(:project_images).find(params[:id])
 
@@ -144,8 +139,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.xml
+  # Deletes the project for real.
   def destroy
     @project = Project.find(params[:id])
 

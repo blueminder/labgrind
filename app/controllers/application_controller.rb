@@ -7,8 +7,8 @@
 # before_filter :require_user, :except => [:new, :create]
 class ApplicationController < ActionController::Base
 
-  # I don't know what this does, but I'm assuming it protects this controller
-  # from forgery.
+  # Force all forms to have secret IDs that prevent someone from injecting data
+  # via POST requests
   protect_from_forgery
   helper :all
   helper_method :current_user_session, :current_user
