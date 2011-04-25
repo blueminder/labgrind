@@ -7,7 +7,7 @@ body, p, ol, ul, td {
 }
 
 pre {
-  background-color: #eee;
+  background-color: #eee;p
   padding: 10px;
   font-size: 11px;
 }
@@ -151,9 +151,13 @@ table#transactions td:nth-child(7) {
 
 .project_entry {
   padding: 10px;
-  width: 800px;
+  width: 700px;
 }
 
+.user_entry {
+  padding: 10px;
+  width: 500px;
+}
 
 
 

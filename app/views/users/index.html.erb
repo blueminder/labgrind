@@ -1,22 +1,19 @@
 <h1>User Profiles</h1>
 <p id="notice"><%= notice %></p>
-<table class="red">
-  <tr>
-    <th>Users</th>
-    <% if current_user.is_admin? %>
-      <th></th>
-      <th></th>
-    <% end %>
-  </tr>
+
   
   <% @users.each do |user| %>
   
-    <tr>
-      <td>
-      
-      
-    <table class="red">  
-  <tr><td valign="top"><%= image_tag user.avatar.url(:medium) %></td>
+<div class="user_entry"<% if current_user == user %> style="background-color: #ff9999;" id="self"<% end %>>  
+<% if current_user.is_admin? || current_user == user then %>
+  <div class="entry_options">
+  <%= link_to image_tag("/images/edit.png"), edit_user_path(user) %> 
+  <%= link_to image_tag("/images/delete.png"), user_path(user), :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+<% end %>
+  
+    <table class="red" width="400">  
+  <tr><td valign="top" width="100"><%= image_tag user.avatar.url(:medium) %></td>
   <td>
 	<%= link_to user.username, user_path(user) %><br>
   <% if user.is_admin? %>
@@ -26,21 +23,8 @@
   <% end %>
   </td></tr>
   </table>
-  
-	<% if current_user == user %>
-	  <b>* </b>
-	<% end %>
-      </td>
-      <% if current_user.is_admin? %>
-	<td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <% end %>
-      <% if current_user.is_super_admin? %>
-	<td><%= link_to 'Destroy', user_path(user), \
-		:confirm => 'Are you sure?', :method => :delete %></td>
-      <% end %>
-    </tr>
+</div>
   <% end %>
-</table>
 
 <br />
 

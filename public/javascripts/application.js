@@ -83,6 +83,28 @@ $(document).ready(function() {
     $('.entry_options').hide();
   });
   
+
+  
+  $(".user_entry").mouseover(function(event) {
+    $(this).css('background','#ffffcc'); 
+    $(this).children('.entry_options').show();
+  });
+  
+  $(".user_entry").mouseout(function(event) {
+    $(this).css('background',''); 
+    $(this).children('.entry_options').hide();
+  });
+  
+  $("#self.user_entry").mouseover(function(event) {
+    $(this).css('background','#ff9999'); 
+    $(this).children('.entry_options').show();
+  });
+  
+  $("#self.user_entry").mouseout(function(event) {
+    $(this).css('background','#ff9999'); 
+    $(this).children('.entry_options').hide();
+  });
+  
   $('.delete_entry').click(function() {
     $('.delete_entry').post
     return false;
