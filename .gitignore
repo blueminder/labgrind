@@ -5,5 +5,4 @@ tmp/**/*
 *~
 Gemfile.lock
 .redcar
-db/schema.rb
 public/system
