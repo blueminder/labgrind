@@ -118,6 +118,42 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+  end
 
+  # Converts a user into a lab admin
+  def adminify
+    return false unless require_super_admin
+
+    user = User.find(params[:user_id])
+    lab = Lab.find(params[:lab_id])
+    user.class_type = "LabAdmin"
+    user.save
+    user = user.becomes LabAdmin
+    user.lab = lab
+    user.save
+
+    redirect_to(user.becomes User)
+  end
+
+  # Converts a user into a super-admin
+  def superadminify
+    return false unless require_super_admin
+
+    user = User.find(params[:user_id])
+    user.class_type = "Admin"
+    user.save
+
+    redirect_to(user.becomes User)
+  end
+
+  # Converts a user into a plain ol' user.
+  def deadminify
+    return false unless require_super_admin
+
+    user = User.find(params[:user_id])
+    user.class_type = "User"
+    user.save
+
+    redirect_to(user.becomes User)
   end
 end

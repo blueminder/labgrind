@@ -133,6 +133,37 @@
   <% end %>
 </div>
 
+<% if current_user.is_super_admin? %>
+  <%# Display adminification forms %>
+  <% unless @user.is_super_admin? %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "superadminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag "Make SUPER Admin" %>
+    <% end %>
+    <br />
+  <% end %>
+  <% unless @user.is_admin? %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "adminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag "Make admin of..." %>
+      <%= select_tag(:lab_id,
+		     options_from_collection_for_select(Lab.all, :id, :name)) %>
+    <% end %>
+    <br />
+  <% end %>
+  <% if @user.is_admin? and not(@user.is_super_admin?) %>
+    <%= form_tag(url_for(:controller => "users",
+			 :action => "deadminify")) do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag "Make regular user" %>
+    <% end %>
+    <br />
+  <% end %>
+<% end %>
+  
+
 <% if current_user.is_admin? %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>
